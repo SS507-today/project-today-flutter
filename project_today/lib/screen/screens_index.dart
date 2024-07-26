@@ -1,9 +1,9 @@
-import 'package:project_today/src/colors.dart';
+import 'package:project_today/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'package:project_today/screen/screens_group.dart';
-import 'package:project_today/screen/screens_diary.dart';
-import 'package:project_today/screen/screens_onboard.dart';
+import 'package:project_today/screen/group/group_screens.dart';
+import 'package:project_today/screen/diary/diary_screens.dart';
+import 'package:project_today/screen/onboard/onboard_screens.dart';
 
 class IndexScreen extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/src/colors.dart';
+import 'package:project_today/core/constant/colors.dart';
 
 class FontSystem {
   static const TextStyle title = TextStyle(
