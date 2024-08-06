@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_today/screen/test/test_screens.dart';
 
 class DiaryScreen extends StatelessWidget {
   @override
@@ -8,7 +9,15 @@ class DiaryScreen extends StatelessWidget {
         title: Text("Diary"),
       ),
       body: Center(
-        child: Text('This is the Diary Screen'),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TestScreen()),
+            );
+          },
+          child: Text('go to test'),
+        ),
       ),
     );
   }
