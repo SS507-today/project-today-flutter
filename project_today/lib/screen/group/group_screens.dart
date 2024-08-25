@@ -1,14 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/ui/atoms/GradientFloatingActionButton.dart';
+import 'package:project_today/ui/organisms/header.dart';
 
 class GroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Group"),
+      backgroundColor: ColorSystem.White,
+      floatingActionButton: GradientFloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/generate');
+        },
+        iconPath: 'assets/icons/ic_add.svg',
       ),
-      body: Center(
-        child: Text('This is the Group Screen'),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          children: [
+            Header(
+              showNotificationIcon: true,
+              showSettingsIcon: true,
+              barImage: 'assets/images/img_logo.png',
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  Text('This is the Group Screen'),
+                  Image.asset('assets/images/img_group.png')
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }
