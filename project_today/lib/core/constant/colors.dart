@@ -84,4 +84,10 @@ class GredientColorSystem {
     end: Alignment(0.5, -0.2),
     colors: [FabPink, FabOrange],
   );
+
+  static const LinearGradient IndicatorGradient = LinearGradient(
+    colors: [PinkColorSystem.Pink, OrangeColorSystem.Orange],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  );
 }
