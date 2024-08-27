@@ -9,7 +9,7 @@ class GradientFloatingActionButton extends StatelessWidget {
   const GradientFloatingActionButton({
     Key? key,
     required this.onPressed,
-    required this.iconPath,
+    this.iconPath = 'assets/icons/ic_add.svg',
   }) : super(key: key);
 
   @override
