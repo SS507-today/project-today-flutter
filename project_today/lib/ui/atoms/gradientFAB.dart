@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:project_today/core/constant/colors.dart';
 
-class GradientFloatingActionButton extends StatelessWidget {
+class GradientFAB extends StatelessWidget {
   final VoidCallback onPressed;
   final String iconPath;
 
-  const GradientFloatingActionButton({
+  const GradientFAB({
     Key? key,
     required this.onPressed,
     this.iconPath = 'assets/icons/ic_add.svg',
