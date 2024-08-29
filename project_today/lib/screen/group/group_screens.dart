@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/GradientFloatingActionButton.dart';
+import 'package:project_today/ui/atoms/gradientFAB.dart';
 import 'package:project_today/ui/organisms/header.dart';
 
 class GroupScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class GroupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorSystem.White,
-      floatingActionButton: GradientFloatingActionButton(
+      floatingActionButton: GradientFAB(
         onPressed: () {
           Navigator.pushNamed(context, '/generate');
         },
