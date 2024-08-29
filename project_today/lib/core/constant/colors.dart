@@ -64,6 +64,8 @@ class GredientColorSystem {
   static const Color BgPink = Color(0xFFFFD8E1);
   static const Color BorderOrange = Color(0xFFF3BD8B);
   static const Color BgOrange = Color(0xFFFFECDA);
+  static const Color FabPink = Color(0xFFF09FB3);
+  static const Color FabOrange = Color(0xFFF9D0AB);
 
   static const LinearGradient BgGradient = LinearGradient(
     begin: Alignment.bottomLeft,
@@ -75,5 +77,11 @@ class GredientColorSystem {
     begin: Alignment.bottomLeft,
     end: Alignment(0.5, -0.2),
     colors: [BorderPink, BorderOrange],
+  );
+
+  static const LinearGradient FabGradient = LinearGradient(
+    begin: Alignment.bottomLeft,
+    end: Alignment(0.5, -0.2),
+    colors: [FabPink, FabOrange],
   );
 }

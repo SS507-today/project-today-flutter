@@ -25,6 +25,8 @@ flutter:
     - assets/images/kakao.png
     - assets/icon/toast_error.svg
     - assets/icon/toast_success.svg
+    - assets/icons/
+    - assets/images/
 
   #assets:
 
