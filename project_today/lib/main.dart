@@ -8,7 +8,9 @@ import 'package:project_today/screen/onboard/onboard_screens.dart';
 import 'package:project_today/screen/screens_index.dart';
 import 'package:project_today/screen/setting/setting_screens.dart';
 import 'package:project_today/screen/splash/splash_screens.dart';
+import 'package:project_today/screen/week/week_screens.dart';
 import 'package:project_today/screen/write/write_screens.dart';
+import 'package:project_today/screen/write/write_screens2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/generate': (context) => GenerateScreen(),
         '/arrive': (context) => ArriveScreen(),
         '/write': (context) => WriteScreen(),
+        '/week': (context) => WeekScreen(),
       },
       initialRoute: '/',
     );
