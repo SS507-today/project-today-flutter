@@ -8,7 +8,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void moveScreen() {
-    Navigator.pushReplacementNamed(context, '/group');
+    Navigator.pushReplacementNamed(context, '/arrive');
   }
 
   @override
