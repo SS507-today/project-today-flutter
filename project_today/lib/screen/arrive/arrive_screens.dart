@@ -4,6 +4,7 @@ import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/core/constant/fonts.dart';
 import 'package:project_today/ui/atoms/defaultButton.dart';
+import 'package:project_today/ui/molecules/ruleCard.dart';
 import 'package:project_today/ui/organisms/header.dart';
 
 class ArriveScreen extends StatefulWidget {
@@ -22,7 +23,6 @@ class _ArriveScreenState extends State<ArriveScreen>
   void initState() {
     super.initState();
 
-    // MeshGradientController를 초기화합니다.
     _controller = MeshGradientController(
       points: [
         MeshGradientPoint(
@@ -53,7 +53,7 @@ class _ArriveScreenState extends State<ArriveScreen>
   void _startAnimation() async {
     while (!_isDisposed) {
       try {
-        if (_isDisposed) return; // dispose 된 상태에서 애니메이션을 시작하지 않음
+        if (_isDisposed) return;
         await _controller.animateSequence(
           duration: const Duration(seconds: 2),
           sequences: [
@@ -76,7 +76,7 @@ class _ArriveScreenState extends State<ArriveScreen>
           ],
         );
       } catch (e) {
-        if (_isDisposed) return; // dispose 된 상태라면 애니메이션을 중단
+        if (_isDisposed) return;
       }
     }
   }
@@ -119,64 +119,65 @@ class _ArriveScreenState extends State<ArriveScreen>
                     Stack(
                       children: [
                         Container(
-                          width: 231, // 사각형의 크기 + 경계 너비
-                          height: 307, // 사각형의 크기 + 경계 너비
+                          width: 231,
+                          height: 307,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(15),
                             gradient: GredientColorSystem.BorderGradient,
                           ),
                         ),
                         Positioned(
                           top: 1,
                           left: 1,
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(15), // 내부 사각형의 모서리 둥글게
-                            child: Container(
-                              width: 229,
-                              height: 305, // 사각형의 크기
-                              color: Colors.white,
-                              child: MeshGradient(
-                                controller: _controller,
-                                options: MeshGradientOptions(
-                                  blend: 3.5,
-                                  noiseIntensity: 0.5,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/week');
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Container(
+                                width: 229,
+                                height: 305,
+                                color: Colors.white,
+                                child: MeshGradient(
+                                  controller: _controller,
+                                  options: MeshGradientOptions(
+                                    blend: 3.5,
+                                    noiseIntensity: 0.5,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      height: 17.0,
+                    ),
+                    RuleCard(
+                      title: '규칙 1',
+                      content: '까먹지 않고 꼭 쓰기',
+                    ),
+                    RuleCard(
+                      title: '규칙 2',
+                      content: '남의 험담은 하지 않기~',
+                    ),
+                    RuleCard(
+                      title: '규칙 3',
+                      content: '성의있게 쓰기~!',
+                    ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DefaultActionButton(
-                    width: 103,
-                    text: '일기장',
-                    onPressed: onPressed,
-                    isActive: false,
-                  ),
-                  SizedBox(
-                    width: 13.0,
-                  ),
-                  DefaultActionButton(
-                    width: 242,
-                    text: '일기 쓰기',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/write');
-                    },
-                    isActive: true,
-                  ),
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.only(top: 14.0, bottom: 14.0),
+                child: DefaultActionButton(
+                  text: '지난 일기장',
+                  onPressed: onPressed,
+                  isActive: true,
+                )),
           ],
         ),
       ),
