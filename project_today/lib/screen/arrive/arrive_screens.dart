@@ -6,6 +6,7 @@ import 'package:project_today/core/constant/fonts.dart';
 import 'package:project_today/ui/atoms/defaultButton.dart';
 import 'package:project_today/ui/molecules/ruleCard.dart';
 import 'package:project_today/ui/organisms/header.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 
 class ArriveScreen extends StatefulWidget {
   const ArriveScreen({super.key});
@@ -96,7 +97,7 @@ class _ArriveScreenState extends State<ArriveScreen>
         top: true,
         child: Column(
           children: [
-            Header(
+            const Header(
               showBackButton: true,
               title: "SS507",
               showSettingsIcon: true,
@@ -116,41 +117,47 @@ class _ArriveScreenState extends State<ArriveScreen>
                     SizedBox(
                       height: 38.0,
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          width: 231,
-                          height: 307,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            gradient: GredientColorSystem.BorderGradient,
-                          ),
-                        ),
-                        Positioned(
-                          top: 1,
-                          left: 1,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/week');
-                            },
-                            child: ClipRRect(
+                    AvatarGlow(
+                      startDelay: const Duration(milliseconds: 1000),
+                      glowColor: PinkColorSystem.Pink30,
+                      glowShape: BoxShape.circle,
+                      curve: Curves.fastOutSlowIn,
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 231,
+                            height: 307,
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              child: Container(
-                                width: 229,
-                                height: 305,
-                                color: Colors.white,
-                                child: MeshGradient(
-                                  controller: _controller,
-                                  options: MeshGradientOptions(
-                                    blend: 3.5,
-                                    noiseIntensity: 0.5,
+                              gradient: GredientColorSystem.BorderGradient,
+                            ),
+                          ),
+                          Positioned(
+                            top: 1,
+                            left: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/week');
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                  width: 229,
+                                  height: 305,
+                                  color: Colors.white,
+                                  child: MeshGradient(
+                                    controller: _controller,
+                                    options: MeshGradientOptions(
+                                      blend: 3.5,
+                                      noiseIntensity: 0.5,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 17.0,
