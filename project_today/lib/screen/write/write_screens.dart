@@ -10,8 +10,6 @@ class WriteScreen extends StatefulWidget {
 }
 
 class _WriteScreenState extends State<WriteScreen> {
-  final GlobalKey<ProImageEditorState> editorKey =
-      GlobalKey<ProImageEditorState>();
   Uint8List? editedBytes;
 
   @override
@@ -19,27 +17,25 @@ class _WriteScreenState extends State<WriteScreen> {
     return Scaffold(
       body: ProImageEditor.network(
         'https://picsum.photos/id/237/2000',
-        key: editorKey,
         callbacks: ProImageEditorCallbacks(
           onImageEditingComplete: (Uint8List bytes) async {
             print('Image editing completed.');
             print('Image size in bytes: ${bytes.length}');
 
-            try {
-              editedBytes = bytes;
-
-              if (mounted) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WriteScreen2(imageData: editedBytes!),
-                  ),
-                );
-              } else {
-                print('Widget is not mounted.');
-              }
-            } catch (error) {
-              print('Navigation Error: $error');
+            editedBytes = bytes;
+          },
+          onCloseEditor: () {
+            if (editedBytes != null) {
+              // 이미지가 null이 아닐 때 다음 화면으로 이동
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WriteScreen2(imageData: editedBytes!),
+                ),
+              );
+            } else {
+              // 이미지가 null일 경우 현재 화면을 닫음
+              Navigator.of(context).pop();
             }
           },
         ),
