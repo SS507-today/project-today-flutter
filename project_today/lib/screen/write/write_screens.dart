@@ -16,7 +16,7 @@ class _WriteScreenState extends State<WriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ProImageEditor.network(
-        'https://picsum.photos/id/237/2000',
+        'https://firebasestorage.googleapis.com/v0/b/mobile-dev-4b849.appspot.com/o/diary.jpeg?alt=media&token=98a01b70-e526-4458-bcbd-7c96491407b6',
         callbacks: ProImageEditorCallbacks(
           onImageEditingComplete: (Uint8List bytes) async {
             print('Image editing completed.');

@@ -21,7 +21,7 @@ class WriteScreen2 extends StatelessWidget {
               showBackButton: true,
               showCompleteIcon: true,
               onCompleteIconPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(imageData); // 편집된 이미지를 반환
               },
             ),
             Expanded(
