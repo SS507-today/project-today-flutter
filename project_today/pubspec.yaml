@@ -23,10 +23,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/i1.png
-    - assets/images/kakao.png
-    - assets/icon/toast_error.svg
-    - assets/icon/toast_success.svg
+    - assets/icon/
     - assets/icons/
     - assets/images/
 
