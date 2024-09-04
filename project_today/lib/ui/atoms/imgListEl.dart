@@ -30,7 +30,7 @@ class ImgListEl extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 17.0, vertical: 18.0),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: GreyColorSystem.Grey3,
           borderRadius: BorderRadius.circular(14.0),
         ),
         child: Row(
