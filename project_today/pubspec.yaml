@@ -16,6 +16,8 @@ dependencies:
   pro_image_editor: ^4.3.5
   avatar_glow: ^3.0.1
   image_picker: ^0.8.5+3
+  kakao_flutter_sdk: ^1.9.5
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

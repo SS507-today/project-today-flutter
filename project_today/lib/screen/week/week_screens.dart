@@ -164,7 +164,7 @@ class _WeekScreenState extends State<WeekScreen> {
                       items.add({
                         'id': items.length,
                         'date': '2024년 8월 8일',
-                        'image': 'assets/images/d5.png', // TODO 반환된 이미지 추가
+                        'image': 'assets/images/d5.jpg', // TODO 반환된 이미지 추가
                         'authorInfo': {
                           'name': '수연',
                           'desc': '내 최애 음식은 짜장면',
