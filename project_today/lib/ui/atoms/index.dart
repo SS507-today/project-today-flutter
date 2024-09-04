@@ -1,5 +1,6 @@
 library atoms;
 
+export 'customCard.dart';
 export 'customTextField.dart';
 export 'customToast.dart';
 export 'defaultButton.dart';
