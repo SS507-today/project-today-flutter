@@ -4,15 +4,20 @@ import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:project_today/core/constant/colors.dart';
 
 class CustomMeshGradientBox extends StatefulWidget {
+  ///박스 가로 길이
   final double width;
+
+  ///박스 세로 길이
   final double height;
-  final VoidCallback? onTap; // onTap을 nullable로 설정
+
+  ///탭 했을 때 실행 될 콜백 함수 (null 일 시 아무것도 실행 X)
+  final VoidCallback? onTap;
 
   const CustomMeshGradientBox({
     Key? key,
     this.width = 231,
     this.height = 307,
-    this.onTap, // 기본값을 null로 설정
+    this.onTap,
   }) : super(key: key);
 
   @override
