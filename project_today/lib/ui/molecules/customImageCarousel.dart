@@ -12,11 +12,15 @@ class CustomImageCarousel extends StatefulWidget {
   /// 박스 높이
   final double height;
 
+  /// 페이지가 변경될 때 호출될 콜백
+  final Function(int)? onPageChanged;
+
   const CustomImageCarousel({
     Key? key,
     required this.imageUrls,
     this.viewportFraction = 0.618,
     this.height = 324,
+    this.onPageChanged, // onPageChanged 콜백 추가
   }) : super(key: key);
 
   @override
@@ -46,12 +50,16 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: 16),
         SizedBox(
           height: widget.height,
           child: PageView.builder(
             controller: _pageController,
             itemCount: widget.imageUrls.length,
+            onPageChanged: (index) {
+              if (widget.onPageChanged != null) {
+                widget.onPageChanged!(index); // 페이지 변경 시 부모에게 알림
+              }
+            },
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(
