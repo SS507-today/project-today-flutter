@@ -114,13 +114,13 @@ class _CustomMeshGradientBoxState extends State<CustomMeshGradientBox>
             ),
           ),
           Positioned(
-            top: 1,
-            left: 1,
+            top: 2,
+            left: 2,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(12),
               child: Container(
-                width: widget.width - 2, // 경계선 크기를 뺀 너비
-                height: widget.height - 2, // 경계선 크기를 뺀 높이
+                width: widget.width - 4, // 경계선 크기를 뺀 너비
+                height: widget.height - 4, // 경계선 크기를 뺀 높이
                 color: Colors.white,
                 child: MeshGradient(
                   controller: _controller,
