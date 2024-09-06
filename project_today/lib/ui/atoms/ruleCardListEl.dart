@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/core/constant/fonts.dart';
 
-class RuleCard extends StatelessWidget {
-  final String title;
+class RuleCardListEl extends StatelessWidget {
+  final String? title;
   final String content;
 
-  const RuleCard({
+  const RuleCardListEl({
     Key? key,
-    required this.title,
+    this.title,
     required this.content,
   }) : super(key: key);
 
@@ -17,10 +17,12 @@ class RuleCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: FontSystem.buttonBold.copyWith(color: GreyColorSystem.Grey70),
-        ),
+        if (title != null && title!.isNotEmpty)
+          Text(
+            title!,
+            style:
+                FontSystem.buttonBold.copyWith(color: GreyColorSystem.Grey70),
+          ),
         const SizedBox(height: 12.0),
         Container(
           width: double.infinity,
@@ -31,8 +33,11 @@ class RuleCard extends StatelessWidget {
           ),
           child: Text(
             content,
-            style: FontSystem.body1
-                .copyWith(color: GreyColorSystem.Grey70, fontSize: 15),
+            style: FontSystem.body2.copyWith(
+              color: GreyColorSystem.Grey70,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ],
