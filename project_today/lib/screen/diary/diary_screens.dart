@@ -16,7 +16,7 @@ class DiaryScreen extends StatelessWidget {
       showGlowGradientBox: true,
       rules: rules,
       onPressed: () {
-        Navigator.pushReplacementNamed(context, '/diary');
+        Navigator.pushNamed(context, '/past');
       },
     );
   }
