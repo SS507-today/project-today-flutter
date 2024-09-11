@@ -31,8 +31,12 @@ class DefaultListEl extends StatelessWidget {
         width: double.infinity,
         height: 60.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: GreyColorSystem.Grey3,
           borderRadius: BorderRadius.circular(16.0),
+          border: Border.all(
+            color: GreyColorSystem.Grey10,
+            width: 1.0,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
