@@ -1,14 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/GradientFloatingActionButton.dart';
+import 'package:project_today/ui/atoms/gradientFAB.dart';
 import 'package:project_today/ui/organisms/header.dart';
+import 'package:project_today/ui/atoms/VerticalCard.dart';
+
+/// 내 그룹 목업 데이터로 빈배열 전달 시, 조건부 렌더링 됨
+const groupData = [
+  {
+    'id': 0,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': 'SS507',
+  },
+  {
+    'id': 1,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹1',
+  },
+  {
+    'id': 2,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹2',
+  },
+  {
+    'id': 3,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹3',
+  },
+  {
+    'id': 4,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹4',
+  },
+  {
+    'id': 5,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹5',
+  },
+];
 
 class GroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorSystem.White,
-      floatingActionButton: GradientFloatingActionButton(
+      floatingActionButton: GradientFAB(
         onPressed: () {
           Navigator.pushNamed(context, '/generate');
         },
@@ -24,16 +59,72 @@ class GroupScreen extends StatelessWidget {
               barImage: 'assets/images/img_logo.png',
             ),
             Expanded(
-                child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  Text('This is the Group Screen'),
-                  Image.asset('assets/images/img_group.png')
-                ],
-              ),
-            ))
+              child: groupData.isEmpty
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 100),
+                        Text(
+                          '아직 그룹이 없어요\n그룹을 생성해보세요!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: GreyColorSystem.Grey80,
+                          ),
+                        ),
+                        SizedBox(height: 50),
+                        Image.asset(
+                          'assets/images/img_group.png',
+                          width: 256,
+                          height: 222,
+                        ),
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 40.0, bottom: 30.0),
+                            child: Text(
+                              '내 그룹',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: GreyColorSystem.Grey90,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GridView.builder(
+                              itemCount: groupData.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                                childAspectRatio: 0.75, // 카드 비율 설정
+                              ),
+                              itemBuilder: (context, index) {
+                                final group = groupData[index];
+                                return VerticalCard(
+                                  imgPath: group['imgsrc'] as String,
+                                  desc: group['desc'] as String,
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/diary'); //TODO: id 같이 넘김
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+            ),
           ],
         ),
       ),
