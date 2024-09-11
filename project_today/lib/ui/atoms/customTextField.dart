@@ -12,11 +12,19 @@ class CustomTextField extends StatefulWidget {
   ///힌트 메세지
   final String hintText;
 
+  ///텍스트 변경 시 호출되는 콜백 함수
+  final ValueChanged<String>? onChanged;
+
+  ///외부에서 전달받는 TextEditingController
+  final TextEditingController? controller;
+
   const CustomTextField({
     Key? key,
     this.borderColor = GreyColorSystem.Grey3,
     this.inputColor = GreyColorSystem.Grey70,
     required this.hintText,
+    this.onChanged,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -25,12 +33,17 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   final FocusNode _focusNode = FocusNode();
-  final TextEditingController _controller = TextEditingController();
+
+  // controller가 전달되지 않으면 내부에서 컨트롤러 생성
+  late final TextEditingController _controller =
+      widget.controller ?? TextEditingController();
 
   @override
   void dispose() {
     _focusNode.dispose();
-    _controller.dispose();
+    if (widget.controller == null) {
+      _controller.dispose(); // 외부에서 전달된 경우에는 dispose하지 않음
+    }
     super.dispose();
   }
 
@@ -68,9 +81,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             icon: SvgPicture.asset('assets/icons/ic_clear.svg'),
             onPressed: () {
               _controller.clear();
+              if (widget.onChanged != null) {
+                widget.onChanged!('');
+              }
             },
           ),
         ),
+        onChanged: widget.onChanged,
       ),
     );
   }
