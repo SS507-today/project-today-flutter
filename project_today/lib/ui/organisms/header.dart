@@ -9,8 +9,11 @@ class Header extends StatelessWidget {
   final String? title;
   final bool showNotificationIcon;
   final bool showSettingsIcon;
+  final bool showCompleteIcon;
+
   final String? barImage;
 
+  final VoidCallback? onCompleteIconPressed;
   const Header({
     super.key,
     this.backgroundColor = ColorSystem.White,
@@ -18,7 +21,9 @@ class Header extends StatelessWidget {
     this.title,
     this.showNotificationIcon = false,
     this.showSettingsIcon = false,
+    this.showCompleteIcon = false,
     this.barImage,
+    this.onCompleteIconPressed,
   });
 
   @override
@@ -74,6 +79,14 @@ class Header extends StatelessWidget {
                       Navigator.pushNamed(context, '/setting');
                     },
                     iconPath: 'assets/icons/ic_setting.svg',
+                  ),
+                if (showCompleteIcon)
+                  ImgButton(
+                    onPressed: onCompleteIconPressed ??
+                        () {
+                          print("Complete button pressed!");
+                        },
+                    iconPath: 'assets/icons/ic_complete.svg',
                   ),
               ],
             ),
