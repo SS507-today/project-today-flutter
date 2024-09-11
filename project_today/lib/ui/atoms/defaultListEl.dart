@@ -27,12 +27,16 @@ class DefaultListEl extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 19.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 19.0, vertical: 18.0),
         width: double.infinity,
         height: 60.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: GreyColorSystem.Grey3,
           borderRadius: BorderRadius.circular(16.0),
+          border: Border.all(
+            color: GreyColorSystem.Grey10,
+            width: 1.0,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
