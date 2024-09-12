@@ -11,4 +11,5 @@ export 'gradientFAB.dart';
 export 'imgListEl.dart';
 export 'kakaoLoginButton.dart';
 export 'ruleCardListEl.dart';
+export 'tagListEL.dart';
 export 'textFieldMsg.dart';

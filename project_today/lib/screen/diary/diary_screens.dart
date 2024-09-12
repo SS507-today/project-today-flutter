@@ -14,6 +14,9 @@ class DiaryScreen extends StatelessWidget {
       headerTitle: 'SS507',
       topText: "새로운 일기를 담은\n교환일기가 도착했어요!",
       showGlowGradientBox: true,
+      onTapGradientBox: () {
+        Navigator.pushNamed(context, '/read');
+      },
       rules: rules,
       onPressed: () {
         Navigator.pushNamed(context, '/past');

@@ -33,6 +33,9 @@ class TitleCardRule extends StatelessWidget {
   final bool showGradientBox;
   final bool showGlowGradientBox;
 
+  ///그레디언트 박스 탭 했을 때 실행 될 콜백 함수 (null 일 시 아무것도 실행 X)
+  final VoidCallback? onTapGradientBox;
+
   /// 이미지박스
   final String? imgPath;
 
@@ -50,6 +53,7 @@ class TitleCardRule extends StatelessWidget {
     this.createdAt,
     this.showGradientBox = false,
     this.showGlowGradientBox = false,
+    this.onTapGradientBox,
     this.imgPath,
     this.rules,
     this.profileData,
@@ -68,8 +72,14 @@ class TitleCardRule extends StatelessWidget {
           createdAt: createdAt,
         ),
         SizedBox(height: 40),
-        if (showGradientBox) CustomMeshGradientBox(),
-        if (showGlowGradientBox) GlowGradientBox(),
+        if (showGradientBox)
+          CustomMeshGradientBox(
+            onTap: onTapGradientBox,
+          ),
+        if (showGlowGradientBox)
+          GlowGradientBox(
+            onTap: onTapGradientBox,
+          ),
         if (imgPath != null)
           Container(
             width: 266.0,
