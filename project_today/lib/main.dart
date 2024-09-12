@@ -12,6 +12,7 @@ import 'package:project_today/screen/read/read_screens.dart';
 import 'package:project_today/screen/screens_index.dart';
 import 'package:project_today/screen/setting/setting_screens.dart';
 import 'package:project_today/screen/splash/splash_screens.dart';
+import 'package:project_today/screen/write/write_screens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/invite': (context) => InviteScreen(),
         '/timer': (context) => TimerScreen(),
         '/waiting': (context) => WaitingScreens(),
+        '/write': (context) => WriteScreen(),
       },
       initialRoute: '/',
     );
