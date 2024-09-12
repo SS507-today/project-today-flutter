@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/index.dart';
-import 'package:project_today/ui/molecules/index.dart';
+import 'package:project_today/ui/atoms/gradientFAB.dart';
 import 'package:project_today/ui/organisms/header.dart';
+import 'package:project_today/ui/atoms/VerticalCard.dart';
+
+/// 내 그룹 목업 데이터로 빈배열 전달 시, 조건부 렌더링 됨
+const groupData = [
+  {
+    'id': 0,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': 'SS507',
+  },
+  {
+    'id': 1,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹1',
+  },
+  {
+    'id': 2,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹2',
+  },
+  {
+    'id': 3,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹3',
+  },
+  {
+    'id': 4,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹4',
+  },
+  {
+    'id': 5,
+    'imgsrc': 'assets/images/temp_bg.png',
+    'desc': '그룹5',
+  },
+];
 
 class GroupScreen extends StatelessWidget {
   @override
@@ -25,16 +59,16 @@ class GroupScreen extends StatelessWidget {
               barImage: 'assets/images/img_logo.png',
             ),
             Expanded(
-                // Expanded는 남은 공간을 차지하는 데 사용
                 child: SingleChildScrollView(
-              child: CustomImageCarousel(
-                imageUrls: [
-                  'https://i.pinimg.com/564x/a1/dc/56/a1dc56e3c14ae219f3871c341bd9adaa.jpg',
-                  'https://i.pinimg.com/564x/2f/d7/a5/2fd7a59edc51e65dd5bdeeaf010c99c8.jpg',
-                  'https://i.pinimg.com/564x/39/d1/3d/39d13d34277b9ecae11dbabc01abb5cd.jpg',
+              padding: const EdgeInsets.all(20),
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  Text('This is the Group Screen'),
+                  Image.asset('assets/images/img_group.png')
                 ],
               ),
-            )),
+            ))
           ],
         ),
       ),
