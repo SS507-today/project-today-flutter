@@ -37,8 +37,8 @@ class CustomToast extends StatelessWidget {
         children: [
           SvgPicture.asset(
             type == ToastType.POSITIVE
-                ? 'assets/icon/toast_success.svg'
-                : 'assets/icon/toast_error.svg',
+                ? 'assets/icons/toast_success.svg'
+                : 'assets/icons/toast_error.svg',
             width: 16,
             height: 16,
           ),
