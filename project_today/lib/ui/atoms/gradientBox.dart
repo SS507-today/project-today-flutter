@@ -116,17 +116,20 @@ class _CustomMeshGradientBoxState extends State<CustomMeshGradientBox>
           Positioned(
             top: 2,
             left: 2,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                width: widget.width - 4, // 경계선 크기를 뺀 너비
-                height: widget.height - 4, // 경계선 크기를 뺀 높이
-                color: Colors.white,
-                child: MeshGradient(
-                  controller: _controller,
-                  options: MeshGradientOptions(
-                    blend: 3.5,
-                    noiseIntensity: 0.5,
+            child: GestureDetector(
+              onTap: widget.onTap,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  width: widget.width - 4, // 경계선 크기를 뺀 너비
+                  height: widget.height - 4, // 경계선 크기를 뺀 높이
+                  color: Colors.white,
+                  child: MeshGradient(
+                    controller: _controller,
+                    options: MeshGradientOptions(
+                      blend: 3.5,
+                      noiseIntensity: 0.5,
+                    ),
                   ),
                 ),
               ),
