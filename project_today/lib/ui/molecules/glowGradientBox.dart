@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/index.dart';
+import 'package:project_today/core/constant/index.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
 
 class GlowGradientBox extends StatelessWidget {
   final VoidCallback? onTap; // onTap을 nullable로 설정

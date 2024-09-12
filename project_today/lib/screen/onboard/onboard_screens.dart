@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/customTextField.dart';
-import 'package:project_today/ui/atoms/defaultButton.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
 
 class OnboardScreen extends StatefulWidget {
   @override

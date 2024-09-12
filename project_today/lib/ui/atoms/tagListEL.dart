@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class TagListEl extends StatefulWidget {
   /// 요소 메인 텍스트

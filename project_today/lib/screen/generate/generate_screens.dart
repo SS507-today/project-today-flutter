@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/organisms/index.dart';
 import 'package:project_today/ui/templates/generate/generate_page_1.dart';
 import 'package:project_today/ui/templates/generate/generate_page_2.dart';
 import 'package:project_today/ui/templates/generate/generate_page_3.dart';
 import 'package:project_today/ui/templates/generate/generate_page_4.dart';
-import 'package:project_today/ui/organisms/gradientHeader.dart';
-import 'package:project_today/ui/atoms/defaultButton.dart';
 import 'package:project_today/core/constant/colors.dart';
 
 class GenerateScreen extends StatefulWidget {

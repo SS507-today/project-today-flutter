@@ -10,6 +10,8 @@ export 'gradientBox.dart';
 export 'gradientFAB.dart';
 export 'imgListEl.dart';
 export 'kakaoLoginButton.dart';
+export 'notiListEl.dart';
 export 'ruleCardListEl.dart';
 export 'tagListEL.dart';
 export 'textFieldMsg.dart';
+export 'VerticalCard.dart';

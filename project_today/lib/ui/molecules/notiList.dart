@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/ui/atoms/notiListEl.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
 
 class NotiList extends StatelessWidget {
   final List<Map<String, dynamic>> notiData;

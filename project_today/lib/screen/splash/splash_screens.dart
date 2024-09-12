@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; // 카카오 SDK 임포트
-import 'package:project_today/ui/atoms/kakaoLoginButton.dart';
+//import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; // 카카오 SDK 임포트
+import 'package:project_today/ui/atoms/atoms.dart';
 import 'package:project_today/core/constant/colors.dart';
 
 enum SocialPlatform {

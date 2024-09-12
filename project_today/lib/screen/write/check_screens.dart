@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:project_today/ui/templates/checkTemplate.dart';
+import 'package:project_today/ui/templates/index.dart';
 
 List<Map<String, String>> members = [
   {'name': '수연', 'imgPath': 'assets/images/p1.jpg'},

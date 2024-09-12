@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomImageCarousel extends StatefulWidget {

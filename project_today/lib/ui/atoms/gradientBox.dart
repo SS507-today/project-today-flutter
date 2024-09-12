@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class CustomMeshGradientBox extends StatefulWidget {
   ///박스 가로 길이

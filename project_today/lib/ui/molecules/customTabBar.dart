@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/core/constant/fonts.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class CustomTabBar extends StatelessWidget {
   final TabController tabController;

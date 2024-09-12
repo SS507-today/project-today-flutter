@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class VerticalCard extends StatelessWidget {
   /// 배경 이미지 경로

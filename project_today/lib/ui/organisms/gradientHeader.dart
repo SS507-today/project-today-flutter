@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/organisms/header.dart';
+import 'package:project_today/core/constant/index.dart';
+import 'package:project_today/ui/organisms/index.dart';
 
 class GradientHeader extends StatelessWidget {
   /// 페이지네이션을 위한 현재 페이지 인덱스

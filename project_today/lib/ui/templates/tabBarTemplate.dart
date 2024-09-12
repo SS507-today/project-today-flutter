@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
+import 'package:project_today/ui/organisms/index.dart';
 import 'package:project_today/screen/collection/collection_screens.dart';
 import 'package:project_today/screen/member/member_screens.dart';
-import 'package:project_today/ui/atoms/index.dart';
-import 'package:project_today/ui/organisms/index.dart';
 
 class Tabbartemplate extends StatelessWidget {
   /// 헤더에 들어갈 타이틀

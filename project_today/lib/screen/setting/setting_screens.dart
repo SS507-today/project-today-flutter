@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/index.dart';
-import 'package:project_today/ui/organisms/header.dart';
+import 'package:project_today/ui/organisms/index.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:image_picker/image_picker.dart'; // ImagePicker 임포트
 import 'dart:io'; // File을 다루기 위해 필요
-import 'package:project_today/ui/atoms/defaultListEl.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SettingScreen extends StatefulWidget {

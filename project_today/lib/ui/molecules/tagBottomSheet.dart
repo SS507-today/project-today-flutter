@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/core/constant/index.dart';
-import 'package:project_today/ui/atoms/index.dart'; // TagListEl 경로를 맞춰서 사용
+import 'package:project_today/ui/atoms/atoms.dart';
 
 class TagBottomSheet extends StatelessWidget {
   /// 멤버들의 정보가 담긴 리스트 (최대 5명)
@@ -66,7 +65,7 @@ void showTagBottomSheet(
     BuildContext context, List<Map<String, String>> members) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.white,
+    backgroundColor: ColorSystem.White,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
     ),

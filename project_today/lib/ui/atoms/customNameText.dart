@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/core/constant/fonts.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class CustomNameText extends StatefulWidget {
   /// 이름

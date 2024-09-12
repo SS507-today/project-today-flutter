@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/core/constant/fonts.dart';
+import 'package:project_today/core/constant/index.dart';
 
 class Header extends StatelessWidget {
   final Color backgroundColor;

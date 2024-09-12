@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:project_today/core/constant/index.dart';
 
 enum NotiType {
   DEFAULT,

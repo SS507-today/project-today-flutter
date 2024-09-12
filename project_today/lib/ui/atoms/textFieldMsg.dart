@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/core/constant/index.dart';
 
 enum TextFieldMsgType {
