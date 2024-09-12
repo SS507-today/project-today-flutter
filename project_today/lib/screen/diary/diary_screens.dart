@@ -19,7 +19,7 @@ class DiaryScreen extends StatelessWidget {
       },
       rules: rules,
       onPressed: () {
-        Navigator.pushNamed(context, '/past');
+        Navigator.pushNamed(context, '/prev');
       },
     );
   }

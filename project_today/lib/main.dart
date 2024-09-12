@@ -7,7 +7,7 @@ import 'package:project_today/screen/group/group_screens.dart';
 import 'package:project_today/screen/diary/diary_screens.dart';
 import 'package:project_today/screen/invite/invite_screens.dart';
 import 'package:project_today/screen/onboard/onboard_screens.dart';
-import 'package:project_today/screen/past/past_screens.dart';
+import 'package:project_today/screen/prev/prev_screens.dart';
 import 'package:project_today/screen/read/read_screens.dart';
 import 'package:project_today/screen/screens_index.dart';
 import 'package:project_today/screen/setting/setting_screens.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         '/alarm': (context) => AlarmScreen(),
         '/setting': (context) => SettingScreen(),
         '/generate': (context) => GenerateScreen(),
-        '/past': (context) => PastScreen(),
+        '/prev': (context) => PrevScreen(),
         '/read': (context) => ReadScreen(),
         '/invite': (context) => InviteScreen(),
         '/timer': (context) => TimerScreen(),
