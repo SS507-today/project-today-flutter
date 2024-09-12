@@ -4,8 +4,13 @@ import 'package:project_today/core/constant/fonts.dart';
 
 class CustomTabBar extends StatelessWidget {
   final TabController tabController;
+  final List<Widget> tabs;
 
-  const CustomTabBar({Key? key, required this.tabController}) : super(key: key);
+  const CustomTabBar({
+    Key? key,
+    required this.tabController,
+    required this.tabs,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +25,7 @@ class CustomTabBar extends StatelessWidget {
         indicatorHeight: 3.0,
       ),
       indicatorSize: TabBarIndicatorSize.tab,
-      tabs: [
-        Tab(text: "보관함"),
-        Tab(text: "멤버"),
-      ],
+      tabs: tabs,
     );
   }
 }

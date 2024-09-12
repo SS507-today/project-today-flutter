@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 13, 20, 13),
+      padding: const EdgeInsets.fromLTRB(5, 13, 5, 13),
       width: MediaQuery.of(context).size.width,
       height: 58,
       alignment: Alignment.center,
