@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/ui/atoms/index.dart';
+import 'package:project_today/ui/atoms/atoms.dart';
 
 class RuleCardList extends StatelessWidget {
   final List<Map<String, String?>> rules; // title과 content를 담은 리스트
