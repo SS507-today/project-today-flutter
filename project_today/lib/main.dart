@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: '오늘은',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: "Pretendard",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
