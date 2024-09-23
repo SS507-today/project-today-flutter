@@ -49,42 +49,47 @@ class GradientHeader extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Header(
-              backgroundColor: Colors.transparent,
-              showBackButton: true,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: List.generate(
-                4,
-                (index) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: index == currentPage ? colors[0] : colors[1],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Header(
+            backgroundColor: Colors.transparent,
+            showBackButton: true,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                    4,
+                    (index) => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: index == currentPage ? colors[0] : colors[1],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                Text(
+                  text,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.w600,
+                    color: colors[0],
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              text,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.w600,
-                color: colors[0],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
