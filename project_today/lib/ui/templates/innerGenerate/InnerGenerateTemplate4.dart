@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_today/core/constant/colors.dart'; // 색상 관련 상수는 여기에서 정의된 것으로 가정
 import 'package:project_today/ui/atoms/customToast.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GeneratePage4 extends StatelessWidget {
   final String url = "https://today.com/w/main/minjinjorlidayobbbb";
@@ -45,9 +46,11 @@ class GeneratePage4 extends StatelessWidget {
                   color: GreyColorSystem.Grey5,
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: IconButton(
-                  icon: const Icon(Icons.copy, color: GreyColorSystem.Grey80),
-                  onPressed: () => _copyToClipboard(context, url),
+                child: SvgPicture.asset(
+                  'assets/icons/ic_link_copy.svg',
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.scaleDown,
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GeneratePage3 extends StatelessWidget {
   final List<String> rules;
@@ -39,16 +40,26 @@ class GeneratePage3 extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => onRemoveRule(index),
-                          ),
-                          const Text(
-                            '삭제',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.red,
-                              fontWeight: FontWeight.w400,
+                          GestureDetector(
+                            onTap: () => onRemoveRule(index),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/ic_trash.svg',
+                                  width: 16,
+                                  height: 16,
+                                  color: Colors.red,
+                                ),
+                                const SizedBox(width: 4),
+                                const Text(
+                                  '삭제',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
