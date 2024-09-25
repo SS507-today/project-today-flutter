@@ -23,6 +23,16 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
+def dotenv = new Properties()
+//TODO 상대경로 변경
+def envFile = file("/Users/kweonsikyung/Documents/project-today-flutter/project_today/assets/config/.env")
+
+if (envFile.exists()) {
+    envFile.withInputStream { stream -> dotenv.load(stream) } 
+} else {
+    throw new FileNotFoundException("Couldn't find the .env file") 
+}
+
 android {
     namespace = "com.example.project_today"
     compileSdk = flutter.compileSdkVersion
@@ -34,14 +44,23 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.project_today"
-        // You can update the following values to match your application needs.
+         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+    applicationId = "com.example.project_today"
+     // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
+    minSdkVersion 21
+    targetSdkVersion = flutter.targetSdkVersion
+    versionCode = flutterVersionCode.toInteger()
+    versionName = flutterVersionName
+
+    def kakaoKey = dotenv['KAKAO_NATIVE_APP_KEY']
+    if (kakaoKey == null) {
+        throw new GradleException("Kakao key not found in .env file")
+    }
+
+    manifestPlaceholders = [
+        KAKAO_NATIVE_APP_KEY: kakaoKey 
+    ]
     }
 
     buildTypes {

@@ -18,6 +18,8 @@ dependencies:
   skeletonizer: ^1.4.2
   pro_image_editor: ^4.3.5
   image_picker: ^1.1.2
+  kakao_flutter_sdk: ^1.9.5
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +31,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/config/.env
 
   #assets:
 
