@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/ui/templates/generate/generateTemplate.dart';
-import 'package:project_today/ui/templates/generate/generate_page_1.dart';
-import 'package:project_today/ui/templates/generate/generate_page_2.dart';
-import 'package:project_today/ui/templates/generate/generate_page_3.dart';
-import 'package:project_today/ui/templates/generate/generate_page_4.dart';
+import 'package:project_today/ui/templates/generateTemplate.dart';
+import 'package:project_today/ui/templates/innerGenerate/InnerGenerateTemplate1.dart';
+import 'package:project_today/ui/templates/innerGenerate/InnerGenerateTemplate2.dart';
+import 'package:project_today/ui/templates/innerGenerate/InnerGenerateTemplate3.dart';
+import 'package:project_today/ui/templates/innerGenerate/InnerGenerateTemplate4.dart';
 import 'package:project_today/ui/organisms/bottomSheet.dart';
 
 class GenerateScreen extends StatefulWidget {
