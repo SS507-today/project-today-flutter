@@ -14,6 +14,8 @@ import 'package:project_today/screen/setting/setting_screens.dart';
 import 'package:project_today/screen/splash/splash_screens.dart';
 import 'package:project_today/screen/write/write_screens.dart';
 import 'package:project_today/screen/change/change_screens.dart';
+import 'package:project_today/screen/member/view/member_view.dart';
+
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -25,7 +27,6 @@ void main() async {
   KakaoSdk.init(
       nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY'],
       javaScriptAppKey: dotenv.env['KAKAO_JS_KEY']);
-
 
   runApp(const MyApp());
 }
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         '/timer': (context) => TimerScreen(),
         '/waiting': (context) => WaitingScreens(),
         '/write': (context) => WriteScreen(),
+        '/member': (context) => MemberScreen(),
       },
       initialRoute: '/',
     );
