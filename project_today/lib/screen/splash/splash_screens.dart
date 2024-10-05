@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:project_today/ui/atoms/kakaoLoginButton.dart';
 import 'package:project_today/core/constant/colors.dart';
-
-enum SocialPlatform {
-  kakao,
-  none, //로그아웃 용도
-}
+import 'package:project_today/data/services/index.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,16 +8,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void moveScreen() {
-    Navigator.pushReplacementNamed(context, '/onboard');
-  }
+  final AuthService _authService = AuthService(); // AuthService 인스턴스 생성
 
   @override
   void initState() {
     super.initState();
-
-    Timer(const Duration(milliseconds: 3000), () {
-      moveScreen();
+    // 3초 후에 checkUserStatus 호출
+    Future.delayed(Duration(seconds: 3), () {
+      _authService.checkUserStatus(context);
     });
   }
 
@@ -61,32 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Spacer(),
-            KakaoLoginButton(
-              onPressed: () async {
-                try {
-                  OAuthToken token;
-                  if (await isKakaoTalkInstalled()) {
-                    try {
-                      token = await UserApi.instance.loginWithKakaoTalk();
-                      print('>>>>>카카오톡으로 로그인 성공: ${token.accessToken}');
-                    } catch (error) {
-                      print('>>>>>카카오톡으로 로그인 실패: $error');
-                      token = await UserApi.instance.loginWithKakaoAccount();
-                      print('>>>>>카카오계정으로 로그인 성공1: ${token.accessToken}');
-                    }
-                  } else {
-                    token = await UserApi.instance.loginWithKakaoAccount();
-                    print('>>>>>카카오계정으로 로그인 성공2: ${token.accessToken}');
-                  }
-
-                  if (token != null) {
-                    Navigator.pushReplacementNamed(context, '/onboard');
-                  }
-                } catch (error) {
-                  print('>>>>>로그인 중 오류 발생: $error');
-                }
-              },
-            ),
           ],
         ),
       ),
