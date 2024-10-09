@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/screen/alarm/alarm_screens.dart';
+import 'package:project_today/screen/splash/splash_screens.dart';
 import 'package:project_today/screen/diary/timer_screens.dart';
 import 'package:project_today/screen/diary/waiting_screens.dart';
 import 'package:project_today/screen/generate/generate_screens.dart';
@@ -11,7 +12,7 @@ import 'package:project_today/screen/prev/prev_screens.dart';
 import 'package:project_today/screen/read/read_screens.dart';
 import 'package:project_today/screen/screens_index.dart';
 import 'package:project_today/screen/setting/setting_screens.dart';
-import 'package:project_today/screen/splash/splash_screens.dart';
+import 'package:project_today/screen/login/login_screens.dart';
 import 'package:project_today/screen/write/write_screens.dart';
 import 'package:project_today/screen/change/change_screens.dart';
 import 'package:project_today/screen/member/view/member_view.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(),
         '/index': (context) => IndexScreen(),
         '/group': (context) => GroupScreen(),
         '/onboard': (context) => OnboardScreen(),

@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/data/services/index.dart';
+import 'package:project_today/ui/atoms/kakaoLoginButton.dart';
 
-class SplashScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService(); // AuthService 인스턴스 생성
-
-  @override
-  void initState() {
-    super.initState();
-    // 3초 후에 checkUserStatus 호출
-    Future.delayed(Duration(seconds: 3), () {
-      _authService.checkUserStatus(context);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Spacer(),
+            // 카카오 로그인 버튼
+            KakaoLoginButton(
+              onPressed: () async {
+                await _authService.loginWithKakao(context);
+              },
+            ),
           ],
         ),
       ),
