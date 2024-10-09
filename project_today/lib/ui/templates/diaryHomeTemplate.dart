@@ -29,6 +29,9 @@ class Diaryhometemplate extends StatelessWidget {
   /// 이미지박스
   final String? imgPath;
 
+  /// 이미지박스 너비
+  final int? imgWidth;
+
   /// 규칙
   final List<Map<String, String?>>? rules;
 
@@ -55,6 +58,7 @@ class Diaryhometemplate extends StatelessWidget {
     this.showGlowGradientBox = false,
     this.onTapGradientBox,
     this.imgPath,
+    this.imgWidth,
     this.rules,
     this.profileData,
     this.buttonText = "지난 일기장",
@@ -86,6 +90,7 @@ class Diaryhometemplate extends StatelessWidget {
                   showGlowGradientBox: showGlowGradientBox,
                   onTapGradientBox: onTapGradientBox,
                   imgPath: imgPath,
+                  imgWidth: imgWidth,
                   rules: rules,
                   profileData: profileData,
                 ),

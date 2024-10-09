@@ -39,6 +39,9 @@ class TitleCardRule extends StatelessWidget {
   /// 이미지박스
   final String? imgPath;
 
+  // 이미지박스 너비
+  final int? imgWidth;
+
   /// 규칙
   final List<Map<String, String?>>? rules;
 
@@ -55,6 +58,7 @@ class TitleCardRule extends StatelessWidget {
     this.showGlowGradientBox = false,
     this.onTapGradientBox,
     this.imgPath,
+    this.imgWidth,
     this.rules,
     this.profileData,
   });
@@ -72,18 +76,11 @@ class TitleCardRule extends StatelessWidget {
           createdAt: createdAt,
         ),
         SizedBox(height: 40),
-        if (showGradientBox)
-          CustomMeshGradientBox(
-            onTap: onTapGradientBox,
-          ),
-        if (showGlowGradientBox)
-          GlowGradientBox(
-            onTap: onTapGradientBox,
-          ),
         if (imgPath != null)
           Container(
-            width: 266.0,
-            height: 222.0,
+            width: imgWidth?.toDouble() ??
+                double.infinity, // imgWidth가 있으면 해당 값, 없으면 전체 너비
+            height: 305.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
               image: DecorationImage(
@@ -93,6 +90,14 @@ class TitleCardRule extends StatelessWidget {
             ),
           ),
         SizedBox(height: 30),
+        if (showGradientBox)
+          CustomMeshGradientBox(
+            onTap: onTapGradientBox,
+          ),
+        if (showGlowGradientBox)
+          GlowGradientBox(
+            onTap: onTapGradientBox,
+          ),
         if (rules != null) RuleCardList(rules: rules!),
         if (profileData != null)
           Padding(
