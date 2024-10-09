@@ -15,6 +15,8 @@ import 'package:project_today/screen/setting/setting_screens.dart';
 import 'package:project_today/screen/login/login_screens.dart';
 import 'package:project_today/screen/write/write_screens.dart';
 import 'package:project_today/screen/change/change_screens.dart';
+import 'package:project_today/screen/member/view/member_view.dart';
+
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -60,6 +62,7 @@ class MyApp extends StatelessWidget {
         '/timer': (context) => TimerScreen(),
         '/waiting': (context) => WaitingScreens(),
         '/write': (context) => WriteScreen(),
+        '/member': (context) => MemberScreen(),
       },
       initialRoute: '/',
     );
