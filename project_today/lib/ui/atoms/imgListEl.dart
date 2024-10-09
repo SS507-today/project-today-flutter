@@ -42,7 +42,7 @@ class ImgListEl extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(imgPath),
+                  image: _getImageProvider(imgPath),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -76,5 +76,13 @@ class ImgListEl extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ImageProvider _getImageProvider(String path) {
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return NetworkImage(path);
+    } else {
+      return AssetImage(path);
+    }
   }
 }
