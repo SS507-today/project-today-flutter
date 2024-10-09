@@ -63,12 +63,22 @@ class _CustomNameTextState extends State<CustomNameText> {
     super.dispose();
   }
 
+  /// 남은 시간을 "X일 X시간 X분" 형식으로 반환하는 함수
   String _formatTime() {
-    String minutesStr =
-        _remainingTime.inMinutes.remainder(60).toString().padLeft(2, '0');
-    String secondsStr =
-        _remainingTime.inSeconds.remainder(60).toString().padLeft(2, '0');
-    return "$minutesStr:$secondsStr";
+    int days = _remainingTime.inDays;
+    int hours = _remainingTime.inHours.remainder(24);
+    int minutes = _remainingTime.inMinutes.remainder(60);
+
+    String formattedTime = '';
+    if (days > 0) {
+      formattedTime += '${days}일 ';
+    }
+    if (hours > 0 || days > 0) {
+      formattedTime += '${hours}시간 ';
+    }
+    formattedTime += '${minutes}분';
+
+    return formattedTime;
   }
 
   @override
