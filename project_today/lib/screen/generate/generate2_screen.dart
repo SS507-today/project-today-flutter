@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/core/constant/colors.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 
 class GeneratePage2 extends StatelessWidget {
   final List<String> coverList;
@@ -14,42 +14,46 @@ class GeneratePage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width; // 화면 너비 가져오기
+    final double cardWidth = screenWidth * 0.7; // 화면의 70% 너비
+    final double cardHeight = cardWidth * 1.33; // 너비, 높이 비율 따른 계산
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 324,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: coverList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: GestureDetector(
-                    onTap: () => onCoverSelected(index),
-                    child: Container(
-                      width: 243,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        image: DecorationImage(
-                          image: AssetImage(coverList[index]),
-                          fit: BoxFit.cover,
-                        ),
-                        border: Border.all(
-                          color: selectedCoverIndex == index
-                              ? GredientColorSystem.BorderOrange
-                              : Colors.transparent,
-                          width: 2,
-                        ),
-                      ),
-                    ),
+      padding: const EdgeInsets.symmetric(vertical: 0.0),
+      child: SizedBox(
+        child: AppinioSwiper(
+          cardCount: coverList.length,
+          loop: true,
+          backgroundCardCount: 1,
+          backgroundCardScale: 0.9,
+          cardBuilder: (BuildContext context, int index) {
+            return Center(
+              child: Container(
+                width: cardWidth,
+                height: cardHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  image: DecorationImage(
+                    image: AssetImage(coverList[index]),
+                    fit: BoxFit.cover,
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          onSwipeEnd:
+              (int previousIndex, int currentIndex, SwiperActivity activity) {
+            onCoverSelected(currentIndex + 1);
+          },
+        ),
       ),
     );
   }
