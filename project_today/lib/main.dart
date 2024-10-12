@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/screen/alarm/alarm_screens.dart';
 import 'package:project_today/screen/splash/splash_screens.dart';
-import 'package:project_today/screen/diary/timer_screens.dart';
-import 'package:project_today/screen/diary/waiting_screens.dart';
-import 'package:project_today/screen/generate/generate_screens.dart';
-import 'package:project_today/screen/group/group_screens.dart';
-import 'package:project_today/screen/diary/diary_screens.dart';
+import 'package:project_today/screen/home/timer_screens.dart';
+import 'package:project_today/screen/home/waiting_screens.dart';
+import 'package:project_today/screen/home/diary_screens.dart';
+import 'package:project_today/screen/generate/view/generate_view.dart';
+import 'package:project_today/screen/group/view/group_view.dart';
+import 'package:project_today/screen/home/view/home_view.dart';
 import 'package:project_today/screen/invite/invite_screens.dart';
 import 'package:project_today/screen/onboard/onboard_screens.dart';
 import 'package:project_today/screen/prev/prev_screens.dart';
 import 'package:project_today/screen/read/read_screens.dart';
-import 'package:project_today/screen/screens_index.dart';
 import 'package:project_today/screen/setting/setting_screens.dart';
 import 'package:project_today/screen/login/login_screens.dart';
 import 'package:project_today/screen/write/write_screens.dart';
@@ -46,23 +46,34 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => LoginScreen(),
-        '/index': (context) => IndexScreen(),
-        '/group': (context) => GroupScreen(),
+        '/': (context) => SplashScreen(), //회원가입 여부 조회 후 분기 뷰
+        '/login': (context) => LoginScreen(), //카카오 로그인 뷰
+        '/group': (context) => GroupView(), //내 그룹 리스트 렌더 뷰
         '/onboard': (context) => OnboardScreen(),
-        '/diary': (context) => DiaryScreen(),
         '/alarm': (context) => AlarmScreen(),
         '/setting': (context) => SettingScreen(),
         '/change': (context) => ChangeScreen(),
-        '/generate': (context) => GenerateScreen(),
+        '/generate': (context) => GenerateView(), //그룹 생성 뷰
         '/prev': (context) => PrevScreen(),
         '/read': (context) => ReadScreen(),
         '/invite': (context) => InviteScreen(),
-        '/timer': (context) => TimerScreen(),
-        '/waiting': (context) => WaitingScreens(),
+        '/timer': (context) => TimerView(), //교환일기 시작 전 타이머 뷰
+        '/waiting': (context) => WaitingView(), //교환일기 내 차례 아닐 때 뷰
+        '/diary': (context) => DiaryView(), //교환일기 내 차례일 때 뷰
         '/write': (context) => WriteScreen(),
         '/member': (context) => MemberScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/home') {
+          final arguments = settings.arguments as Map<String, dynamic>?;
+          if (arguments != null && arguments.containsKey('id')) {
+            final int groupId = arguments['id'];
+            return MaterialPageRoute(
+              builder: (context) => HomeView(groupId: groupId), //교환일기 내 차례일때 뷰
+            );
+          }
+        }
+        return null;
       },
       initialRoute: '/',
     );
