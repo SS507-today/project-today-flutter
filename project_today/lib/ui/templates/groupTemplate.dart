@@ -95,7 +95,11 @@ class GroupTemplate extends StatelessWidget {
                   imgPath: group['imgsrc'] as String,
                   desc: group['desc'] as String,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/diary'); //TODO: id 같이 넘김
+                    Navigator.pushNamed(
+                      context,
+                      '/home',
+                      arguments: {'id': group['id']}, // id 값을 arguments로 전달
+                    );
                   },
                 );
               },
