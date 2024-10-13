@@ -6,8 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthService {
-  // TODO : localhost 부분에 ip주소 또는 10.0.2.2
-  final String _apiBaseUrl = 'http://localhost:8080'; // 서버의 베이스 URL
+  final String _apiBaseUrl = 'http://3.36.115.177:8081/';
 
   /// 카카오 로그인 로직
   Future<void> loginWithKakao(BuildContext context) async {

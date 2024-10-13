@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 /// 기본적인 HTTP 요청(`GET`, `POST`, `PUT`, `DELETE`) 메서드를 제공
 class ApiService {
   /// 서버의 기본 URL 주소
-  /// TODO: 우리 서버 주소로 바꾸고 환경변수 처리
-  final String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String baseUrl = 'http://3.36.115.177:8081/';
 
   /// [ApiService] 클래스의 싱글턴 인스턴스를 생성
   static final ApiService _instance = ApiService._internal();
