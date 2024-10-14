@@ -32,12 +32,16 @@ class TitleCardRule extends StatelessWidget {
   /// 그레디언트 박스
   final bool showGradientBox;
   final bool showGlowGradientBox;
+  final bool showGlowGradientImageBox;
 
   ///그레디언트 박스 탭 했을 때 실행 될 콜백 함수 (null 일 시 아무것도 실행 X)
   final VoidCallback? onTapGradientBox;
 
   /// 이미지박스
   final String? imgPath;
+
+  // 이미지박스 너비
+  final int? imgWidth;
 
   /// 규칙
   final List<Map<String, String?>>? rules;
@@ -53,8 +57,10 @@ class TitleCardRule extends StatelessWidget {
     this.createdAt,
     this.showGradientBox = false,
     this.showGlowGradientBox = false,
+    this.showGlowGradientImageBox = false,
     this.onTapGradientBox,
     this.imgPath,
+    this.imgWidth,
     this.rules,
     this.profileData,
   });
@@ -72,18 +78,18 @@ class TitleCardRule extends StatelessWidget {
           createdAt: createdAt,
         ),
         SizedBox(height: 40),
-        if (showGradientBox)
-          CustomMeshGradientBox(
-            onTap: onTapGradientBox,
+        if (imgPath != null && showGlowGradientImageBox)
+          GlowGradientImageBox(
+            imgPath: imgPath!, // 이미지 경로 전달
+            width: imgWidth?.toDouble() ?? double.infinity,
+            onTap: onTapGradientBox, // 탭 이벤트 전달
+            height: 305.0,
           ),
-        if (showGlowGradientBox)
-          GlowGradientBox(
-            onTap: onTapGradientBox,
-          ),
-        if (imgPath != null)
+        if (imgPath != null && !showGlowGradientImageBox)
           Container(
-            width: 266.0,
-            height: 222.0,
+            width: imgWidth?.toDouble() ??
+                double.infinity, // imgWidth가 있으면 해당 값, 없으면 전체 너비
+            height: 305.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
               image: DecorationImage(
@@ -93,6 +99,14 @@ class TitleCardRule extends StatelessWidget {
             ),
           ),
         SizedBox(height: 30),
+        if (showGradientBox)
+          CustomMeshGradientBox(
+            onTap: onTapGradientBox,
+          ),
+        if (showGlowGradientBox)
+          GlowGradientBox(
+            onTap: onTapGradientBox,
+          ),
         if (rules != null) RuleCardList(rules: rules!),
         if (profileData != null)
           Padding(

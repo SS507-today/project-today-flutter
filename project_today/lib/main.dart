@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/screen/alarm/alarm_screens.dart';
+import 'package:project_today/screen/home/timer_screens.dart';
+import 'package:project_today/screen/home/waiting_screens.dart';
+import 'package:project_today/screen/home/diary_screens.dart';
+import 'package:project_today/screen/generate/view/generate_view.dart';
+import 'package:project_today/screen/group/view/group_view.dart';
+import 'package:project_today/screen/home/view/home_view.dart';
+import 'package:project_today/screen/invite/view/invite_view.dart';
+import 'package:project_today/screen/prev/prev_screens.dart';
+import 'package:project_today/screen/read/read_screens.dart';
 import 'package:project_today/screen/onboard/view/onboard_view.dart';
 import 'package:project_today/screen/setting/view/setting_view.dart';
 import 'package:project_today/screen/splash/view/splash_view.dart';
-import 'package:project_today/screen/diary/timer_screens.dart';
-import 'package:project_today/screen/diary/waiting_screens.dart';
-import 'package:project_today/screen/generate/generate_screens.dart';
-import 'package:project_today/screen/group/group_screens.dart';
-import 'package:project_today/screen/diary/diary_screens.dart';
-import 'package:project_today/screen/invite/invite_screens.dart';
-import 'package:project_today/screen/prev/prev_screens.dart';
-import 'package:project_today/screen/read/read_screens.dart';
-import 'package:project_today/screen/login/login_screens.dart';
+import 'package:project_today/screen/login/view/login_view.dart';
 import 'package:project_today/screen/write/write_screens.dart';
 import 'package:project_today/screen/change/view/change_view.dart';
 import 'package:project_today/screen/member/view/member_view.dart';
+import 'package:project_today/screen/participate/view/participate_view.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -46,20 +48,33 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashView(),
         '/login': (context) => LoginView(),
-        '/group': (context) => GroupScreen(),
+        '/group': (context) => GroupView(), //내 그룹 리스트 렌더 뷰
         '/onboard': (context) => OnboardView(),
-        '/diary': (context) => DiaryScreen(),
         '/alarm': (context) => AlarmScreen(),
         '/setting': (context) => SettingView(),
         '/change': (context) => ChangeView(),
-        '/generate': (context) => GenerateScreen(),
+        '/generate': (context) => GenerateView(), //그룹 생성 뷰
         '/prev': (context) => PrevScreen(),
         '/read': (context) => ReadScreen(),
-        '/invite': (context) => InviteScreen(),
-        '/timer': (context) => TimerScreen(),
-        '/waiting': (context) => WaitingScreens(),
+        '/timer': (context) => TimerView(), //교환일기 시작 전 타이머 뷰
+        '/waiting': (context) => WaitingView(), //교환일기 내 차례 아닐 때 뷰
+        '/diary': (context) => DiaryView(), //교환일기 내 차례일 때 뷰
         '/write': (context) => WriteScreen(),
         '/member': (context) => MemberScreen(),
+        '/participate': (context) => ParticipateView(), //참가 코드 입력 뷰
+        '/invite': (context) => InviteView(), //유효한 참가 코드 시 그룹 정보 렌더 뷰
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/home') {
+          final arguments = settings.arguments as Map<String, dynamic>?;
+          if (arguments != null && arguments.containsKey('id')) {
+            final int groupId = arguments['id'];
+            return MaterialPageRoute(
+              builder: (context) => HomeView(groupId: groupId), //교환일기 홈 분기점
+            );
+          }
+        }
+        return null;
       },
       initialRoute: '/',
     );

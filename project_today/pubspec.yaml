@@ -22,6 +22,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   http: ^1.2.2
   provider: ^6.0.5
+  appinio_swiper: ^2.1.1
   get: ^4.6.6
   shared_preferences: ^2.3.2
 

@@ -29,12 +29,6 @@ class Tabbartemplate extends StatelessWidget {
               title: headerTitle,
               showSettingsIcon: true,
             ),
-            Image.asset(
-              imgPath,
-              width: MediaQuery.of(context).size.width,
-              height: 211,
-              fit: BoxFit.cover,
-            ),
             Expanded(
               child: CustomTabComponent(
                 tabs: [
