@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/data/services/index.dart';
+import 'package:project_today/screen/login/view_model/login_view_model.dart';
 import 'package:project_today/ui/atoms/kakaoLoginButton.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginView extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  final AuthService _authService = AuthService(); // AuthService 인스턴스 생성
+class _LoginViewState extends State<LoginView> {
+  final LoginViewModel _loginViewModel = Get.put(LoginViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Spacer(),
-            // 카카오 로그인 버튼
             KakaoLoginButton(
               onPressed: () async {
-                await _authService.loginWithKakao(context);
+                await _loginViewModel.login(context);
               },
             ),
           ],

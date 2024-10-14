@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   /// 서버의 기본 URL 주소
   /// TODO: 우리 서버 주소로 바꾸고 환경변수 처리
-  final String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String baseUrl = 'http://3.36.115.177:8081';
 
   /// [ApiService] 클래스의 싱글턴 인스턴스를 생성
   static final ApiService _instance = ApiService._internal();
@@ -20,7 +20,8 @@ class ApiService {
   /// 기본 공통 헤더 설정
   Map<String, String> _headers = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    'accept': '*/*',
+    //  'Accept': 'application/json',
   };
 
   /// [[[ GET 요청을 보내는 API 호출 함수 ]]]
@@ -38,10 +39,17 @@ class ApiService {
     Map<String, String>? headers,
     Map<String, String>? queryParams,
     String? accessToken,
+    bool excludeContentType = false,
   }) async {
     final uri =
         Uri.parse('$baseUrl$endpoint').replace(queryParameters: queryParams);
     final combinedHeaders = _createHeaders(headers, accessToken);
+
+    // excludeContentType 플래그가 true인 경우 Content-Type 제거
+    if (excludeContentType) {
+      combinedHeaders.remove('Content-Type');
+    }
+
     final response = await http.get(uri, headers: combinedHeaders);
     _handleResponse(response);
     return response;
@@ -62,9 +70,18 @@ class ApiService {
     Map<String, String>? headers,
     dynamic body,
     String? accessToken,
+    Map<String, String>? queryParams, // queryParams 추가
+    bool excludeContentType = false,
   }) async {
-    final uri = Uri.parse('$baseUrl$endpoint');
+    final uri =
+        Uri.parse('$baseUrl$endpoint').replace(queryParameters: queryParams);
     final combinedHeaders = _createHeaders(headers, accessToken);
+
+    // excludeContentType 플래그가 true인 경우 Content-Type 제거
+    if (excludeContentType) {
+      combinedHeaders.remove('Content-Type');
+    }
+
     final response = await http.post(
       uri,
       headers: combinedHeaders,
@@ -139,6 +156,8 @@ class ApiService {
     if (accessToken != null && accessToken.isNotEmpty) {
       combinedHeaders['Authorization'] = 'Bearer $accessToken';
     }
+    print('>>> 요청 헤더: $combinedHeaders'); // 요청 헤더 출력
+
     return combinedHeaders;
   }
 
