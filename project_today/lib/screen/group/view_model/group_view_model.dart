@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_today/data/services/get_my_group_service.dart';
 import 'package:project_today/data/models/group_model.dart';
+import 'package:project_today/data/repositories/auth_repository.dart';
 
 /// 내 그룹 리스트를 불러옴
 class GroupViewModel extends ChangeNotifier {
+  final AuthRepository _authRepository = AuthRepository();
   final GetMyGroupService _service = GetMyGroupService();
 
   List<Group> _Groups = [];
@@ -13,16 +16,30 @@ class GroupViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> fetchGroups() async {
+    final tokens = await _authRepository.loadTokens();
+    final String? accessToken = tokens['jwtAccessToken'];
+
+    if (accessToken == null) {
+      Get.snackbar(
+        "오류",
+        "사용자 정보를 불러오는 중 오류가 발생했습니다.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
     _isLoading = true;
     notifyListeners();
 
     try {
-      const String accessToken =
-          'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjg5ODcyNzAxIiwiaWF0IjoxNzI4Mzg3NzI1LCJleHAiOjE3Mjk1OTczMjV9.MjYwVayW2B7TuNaaq3Uy66eTsg6D3Va6hftnc8dR3zg';
-
       _Groups = await _service.fetchGroups(accessToken);
     } catch (e) {
       print('Error fetching Groups: $e');
+      Get.snackbar(
+        "오류",
+        "그룹 정보를 불러오는 중 오류가 발생했습니다.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       _isLoading = false;
       notifyListeners();

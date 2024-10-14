@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_today/data/models/home_model.dart';
 import 'package:project_today/data/models/group_status_model.dart';
 import 'package:project_today/data/services/get_home_service.dart';
+import 'package:project_today/data/repositories/auth_repository.dart';
 
 ///교환일기 홈 - 분기되는 뷰에 대한 모든 정보를 가져옴 (diary, timer, waiting)
 class HomeViewModel extends ChangeNotifier {
+  final AuthRepository _authRepository = AuthRepository();
   final GetHomeService _diaryService = GetHomeService();
 
   GroupStatus? _groupStatus;
@@ -60,38 +63,50 @@ class HomeViewModel extends ChangeNotifier {
     _hasError = false;
     notifyListeners();
 
-    try {
-      await fetchGroupStatus(groupId);
-      if (_groupStatus?.status == 'ACTIVE') {
-        await fetchGroupHome(groupId);
-      }
+    final tokens = await _authRepository.loadTokens();
+    final String? accessToken = tokens['jwtAccessToken'];
+
+    if (accessToken == null) {
+      Get.snackbar(
+        "오류",
+        "사용자 정보를 불러오는 중 오류가 발생했습니다.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       _isLoading = false;
+      notifyListeners();
+      return;
+    }
+
+    try {
+      await fetchGroupStatus(groupId, accessToken);
+      if (_groupStatus?.status == 'ACTIVE') {
+        await fetchGroupHome(groupId, accessToken);
+      }
     } catch (e) {
       _hasError = true;
       _errorMessage = e.toString();
+      Get.snackbar(
+        "오류",
+        "그룹 상태 또는 홈 정보를 불러오는 중 오류가 발생했습니다: $e",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
       _isLoading = false;
+      notifyListeners();
     }
-
-    notifyListeners();
   }
 
-  Future<void> fetchGroupStatus(int groupId) async {
+  Future<void> fetchGroupStatus(int groupId, String accessToken) async {
     try {
-      _groupStatus = await _diaryService.fetchGroupStatus(
-        groupId,
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjg5ODcyNzAxIiwiaWF0IjoxNzI4Mzg3NzI1LCJleHAiOjE3Mjk1OTczMjV9.MjYwVayW2B7TuNaaq3Uy66eTsg6D3Va6hftnc8dR3zg',
-      );
+      _groupStatus = await _diaryService.fetchGroupStatus(groupId, accessToken);
     } catch (e) {
       throw Exception('그룹 상태를 불러오는데 실패했습니다.');
     }
   }
 
-  Future<void> fetchGroupHome(int groupId) async {
+  Future<void> fetchGroupHome(int groupId, String accessToken) async {
     try {
-      _diaryResponse = await _diaryService.fetchGroupHome(
-        groupId,
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNjg5ODcyNzAxIiwiaWF0IjoxNzI4Mzg3NzI1LCJleHAiOjE3Mjk1OTczMjV9.MjYwVayW2B7TuNaaq3Uy66eTsg6D3Va6hftnc8dR3zg',
-      );
+      _diaryResponse = await _diaryService.fetchGroupHome(groupId, accessToken);
     } catch (e) {
       throw Exception('홈 화면 정보를 불러오는데 실패했습니다.');
     }
