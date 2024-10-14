@@ -32,15 +32,15 @@ class ParticipateTemplate extends StatelessWidget {
             height: 230,
             width: double.infinity,
             decoration: BoxDecoration(
-              gradient: RadialGradient(
-                center: Alignment.center,
-                radius: 2,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFFFECDA).withOpacity(0.7),
-                  Color(0xFFFFD8E1).withOpacity(0.7),
+                  GredientColorSystem.BgOrange.withOpacity(0.7),
+                  GredientColorSystem.BgPink.withOpacity(0.7),
                   Colors.white.withOpacity(1),
                 ],
-                stops: [0.0, 0.8, 1.0],
+                stops: [0.0, 0.4, 0.8],
               ),
             ),
             child: Column(
