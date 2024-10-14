@@ -32,6 +32,7 @@ class TitleCardRule extends StatelessWidget {
   /// 그레디언트 박스
   final bool showGradientBox;
   final bool showGlowGradientBox;
+  final bool showGlowGradientImageBox;
 
   ///그레디언트 박스 탭 했을 때 실행 될 콜백 함수 (null 일 시 아무것도 실행 X)
   final VoidCallback? onTapGradientBox;
@@ -56,6 +57,7 @@ class TitleCardRule extends StatelessWidget {
     this.createdAt,
     this.showGradientBox = false,
     this.showGlowGradientBox = false,
+    this.showGlowGradientImageBox = false,
     this.onTapGradientBox,
     this.imgPath,
     this.imgWidth,
@@ -76,7 +78,14 @@ class TitleCardRule extends StatelessWidget {
           createdAt: createdAt,
         ),
         SizedBox(height: 40),
-        if (imgPath != null)
+        if (imgPath != null && showGlowGradientImageBox)
+          GlowGradientImageBox(
+            imgPath: imgPath!, // 이미지 경로 전달
+            width: imgWidth?.toDouble() ?? double.infinity,
+            onTap: onTapGradientBox, // 탭 이벤트 전달
+            height: 305.0,
+          ),
+        if (imgPath != null && !showGlowGradientImageBox)
           Container(
             width: imgWidth?.toDouble() ??
                 double.infinity, // imgWidth가 있으면 해당 값, 없으면 전체 너비

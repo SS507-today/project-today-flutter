@@ -12,7 +12,8 @@ class DiaryView extends StatelessWidget {
         return Diaryhometemplate(
           headerTitle: 'SS507',
           topText: "새로운 일기를 담은\n교환일기가 도착했어요!",
-          showGlowGradientBox: true,
+          showGlowGradientBox: false,
+          showGlowGradientImageBox: true,
           onTapGradientBox: () {
             Navigator.pushNamed(context, '/read');
           },

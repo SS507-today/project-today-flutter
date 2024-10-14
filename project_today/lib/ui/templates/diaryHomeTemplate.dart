@@ -22,6 +22,7 @@ class Diaryhometemplate extends StatelessWidget {
   /// 그레디언트 박스
   final bool showGradientBox;
   final bool showGlowGradientBox;
+  final bool showGlowGradientImageBox;
 
   ///그레디언트 박스 탭 했을 때 실행 될 콜백 함수 (null 일 시 아무것도 실행 X)
   final VoidCallback? onTapGradientBox;
@@ -57,6 +58,7 @@ class Diaryhometemplate extends StatelessWidget {
     this.showGradientBox = false,
     this.showGlowGradientBox = false,
     this.onTapGradientBox,
+    this.showGlowGradientImageBox = false,
     this.imgPath,
     this.imgWidth,
     this.rules,
@@ -86,7 +88,7 @@ class Diaryhometemplate extends StatelessWidget {
                   topText: topText,
                   bottomText: bottomText,
                   createdAt: createdAt,
-                  showGradientBox: showGradientBox,
+                  showGlowGradientImageBox: showGlowGradientImageBox,
                   showGlowGradientBox: showGlowGradientBox,
                   onTapGradientBox: onTapGradientBox,
                   imgPath: imgPath,
