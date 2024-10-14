@@ -36,7 +36,21 @@ class _CustomNameTextState extends State<CustomNameText> {
     super.initState();
 
     if (widget.createdAt != null) {
+      _calculateRemainingTime(); // 초기 계산
       _startTimer(); // 타이머 시작
+    }
+  }
+
+  void _calculateRemainingTime() {
+    final now = DateTime.now();
+    if (widget.createdAt != null && now.isBefore(widget.createdAt!)) {
+      setState(() {
+        _remainingTime = widget.createdAt!.difference(now);
+      });
+    } else {
+      setState(() {
+        _remainingTime = Duration.zero;
+      });
     }
   }
 
