@@ -8,11 +8,11 @@ class GetHomeService {
   final ApiService _apiService = ApiService();
 
   String _buildStatusEndpoint(int groupId) {
-    return 'shareGroups/$groupId/status';
+    return '/shareGroups/$groupId/status';
   }
 
   String _buildHomeEndpoint(int groupId) {
-    return 'shareGroups/$groupId/home';
+    return '/shareGroups/$groupId/home';
   }
 
   ///그룹 상태 조회 GET

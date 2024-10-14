@@ -11,7 +11,7 @@ class PostGroupService {
       DetailGroupModel group, String accessToken) async {
     try {
       final response = await _apiService.post(
-        'shareGroups',
+        '/shareGroups',
         body: group.toJson(),
         accessToken: accessToken,
       );

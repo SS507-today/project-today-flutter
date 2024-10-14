@@ -7,7 +7,7 @@ class GetParticipateService {
   final ApiService _apiService = ApiService();
 
   String _buildCodeEndpoint(String code) {
-    return 'shareGroups?inviteCode=$code';
+    return '/shareGroups?inviteCode=$code';
   }
 
   ///초대 코드로 그룹 조회 GET

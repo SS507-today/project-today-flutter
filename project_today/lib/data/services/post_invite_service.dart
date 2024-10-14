@@ -6,7 +6,7 @@ class PostInviteService {
   final ApiService _apiService = ApiService();
 
   String _buildInviteEndpoint(int shareGroupId) {
-    return 'shareGroups/$shareGroupId/join';
+    return '/shareGroups/$shareGroupId/join';
   }
 
   /// shareGroupId로 해당 그룹 참여 POST

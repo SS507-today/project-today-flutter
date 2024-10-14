@@ -6,7 +6,7 @@ import 'package:project_today/data/services/api_service.dart';
 class GetMyGroupService {
   final ApiService _apiService = ApiService();
 
-  static const String groupsEndpoint = 'shareGroups/my?page=0&size=10';
+  static const String groupsEndpoint = '/shareGroups/my?page=0&size=10';
 
   ///내가 속한 그룹 조회 GET
   Future<List<Group>> fetchGroups(String accessToken) async {
