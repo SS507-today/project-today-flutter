@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/screen/alarm/alarm_screens.dart';
-import 'package:project_today/screen/splash/splash_screens.dart';
 import 'package:project_today/screen/home/timer_screens.dart';
 import 'package:project_today/screen/home/waiting_screens.dart';
 import 'package:project_today/screen/home/diary_screens.dart';
@@ -8,16 +7,16 @@ import 'package:project_today/screen/generate/view/generate_view.dart';
 import 'package:project_today/screen/group/view/group_view.dart';
 import 'package:project_today/screen/home/view/home_view.dart';
 import 'package:project_today/screen/invite/view/invite_view.dart';
-import 'package:project_today/screen/onboard/onboard_screens.dart';
 import 'package:project_today/screen/prev/prev_screens.dart';
 import 'package:project_today/screen/read/read_screens.dart';
-import 'package:project_today/screen/setting/setting_screens.dart';
-import 'package:project_today/screen/login/login_screens.dart';
+import 'package:project_today/screen/onboard/view/onboard_view.dart';
+import 'package:project_today/screen/setting/view/setting_view.dart';
+import 'package:project_today/screen/splash/view/splash_view.dart';
+import 'package:project_today/screen/login/view/login_view.dart';
 import 'package:project_today/screen/write/write_screens.dart';
-import 'package:project_today/screen/change/change_screens.dart';
+import 'package:project_today/screen/change/view/change_view.dart';
 import 'package:project_today/screen/member/view/member_view.dart';
 import 'package:project_today/screen/participate/view/participate_view.dart';
-
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -47,13 +46,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => LoginScreen(),
+        '/': (context) => SplashView(),
+        '/login': (context) => LoginView(),
         '/group': (context) => GroupView(), //내 그룹 리스트 렌더 뷰
-        '/onboard': (context) => OnboardScreen(),
+        '/onboard': (context) => OnboardView(),
         '/alarm': (context) => AlarmScreen(),
-        '/setting': (context) => SettingScreen(),
-        '/change': (context) => ChangeScreen(),
+        '/setting': (context) => SettingView(),
+        '/change': (context) => ChangeView(),
         '/generate': (context) => GenerateView(), //그룹 생성 뷰
         '/prev': (context) => PrevScreen(),
         '/read': (context) => ReadScreen(),
@@ -71,7 +70,7 @@ class MyApp extends StatelessWidget {
           if (arguments != null && arguments.containsKey('id')) {
             final int groupId = arguments['id'];
             return MaterialPageRoute(
-              builder: (context) => HomeView(groupId: groupId), //교환일기 내 차례일때 뷰
+              builder: (context) => HomeView(groupId: groupId), //교환일기 홈 분기점
             );
           }
         }

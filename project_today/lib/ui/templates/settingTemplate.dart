@@ -6,15 +6,15 @@ import 'package:project_today/ui/atoms/atoms.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SettingTemplate extends StatelessWidget {
-  final XFile? image;
-  final VoidCallback onImagePick;
+  final String? image;
+  // final VoidCallback onImagePick;
   final VoidCallback onChangeNickname;
   final VoidCallback onLogout;
   final String nickname;
 
   const SettingTemplate({
     required this.image,
-    required this.onImagePick,
+    //  required this.onImagePick,
     required this.onChangeNickname,
     required this.onLogout,
     required this.nickname,
@@ -43,13 +43,14 @@ class SettingTemplate extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          backgroundImage: image != null
-                              ? FileImage(File(image!.path))
+                          backgroundImage: image != null && image!.isNotEmpty
+                              ? NetworkImage(
+                                  image!) // image가 null이 아니고 비어있지 않다면 NetworkImage 사용
                               : AssetImage('assets/images/i1.png')
-                                  as ImageProvider,
+                                  as ImageProvider, // 그렇지 않다면 기본 이미지 사용
                           backgroundColor: Colors.grey[300],
                         ),
-                        Positioned(
+                        /*  Positioned(
                           bottom: 0,
                           right: 0,
                           child: GestureDetector(
@@ -63,7 +64,7 @@ class SettingTemplate extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
