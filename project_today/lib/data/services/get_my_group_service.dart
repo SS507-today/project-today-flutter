@@ -8,7 +8,10 @@ class GetMyGroupService {
 
   static const String groupsEndpoint = '/shareGroups/my?page=0&size=10';
 
-  ///내가 속한 그룹 조회 GET
+  ///내가 속한 그룹 조회 GET <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰 <br />
+  ///
+  /// @return [http.Response] 서버 응답의 data > shareGroupInfoList 필드 <br />
   Future<List<Group>> fetchGroups(String accessToken) async {
     try {
       final response = await _apiService.get(

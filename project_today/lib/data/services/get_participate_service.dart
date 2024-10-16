@@ -11,6 +11,10 @@ class GetParticipateService {
   }
 
   ///초대 코드로 그룹 조회 GET
+  /// @param [String] code - 참가 코드 <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰 (옵션). <br />
+  ///
+  /// @return [http.Response] 서버 응답의 data 필드 <br />
   Future<ParticipateGroup> fetchParticipate(
       String code, String accessToken) async {
     try {

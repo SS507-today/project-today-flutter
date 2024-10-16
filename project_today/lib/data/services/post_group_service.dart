@@ -7,6 +7,10 @@ class PostGroupService {
   final ApiService _apiService = ApiService();
 
   ///그룹 생성 POST
+  /// @param [DetailGroupModel] group - 그룹 생성 정보 <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰<br />
+  ///
+  /// @return [http.Response] 서버 응답의 data 필드 <br />
   Future<Map<String, dynamic>> createGroup(
       DetailGroupModel group, String accessToken) async {
     try {

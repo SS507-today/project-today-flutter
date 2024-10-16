@@ -10,6 +10,10 @@ class PostInviteService {
   }
 
   /// shareGroupId로 해당 그룹 참여 POST
+  /// @param [int] shareGroupId - 공유 그룹 id <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰<br />
+  ///
+  /// @return [http.Response] 서버 응답의 data 필드 <br />
   Future<Map<String, dynamic>?> postInvite(
       int shareGroupId, String accessToken) async {
     try {
