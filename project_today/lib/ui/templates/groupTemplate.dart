@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/gradientFAB.dart';
+import 'package:project_today/ui/molecules/gradientFabMenu.dart'; // GradientFabMenu import
 import 'package:project_today/ui/organisms/header.dart';
 import 'package:project_today/ui/atoms/VerticalCard.dart';
 
@@ -11,14 +11,26 @@ class GroupTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> menuItems = [
+      {
+        'label': '그룹 생성하기',
+        'font-color': PinkColorSystem.Pink,
+        'bg-color': PinkColorSystem.Pink10,
+        'route': '/generate',
+        'animationOffset': 2,
+      },
+      {
+        'label': '그룹 참가하기',
+        'font-color': OrangeColorSystem.Orange,
+        'bg-color': OrangeColorSystem.Orange10,
+        'route': '/participate',
+        'animationOffset': 1,
+      },
+    ];
+
     return Scaffold(
       backgroundColor: ColorSystem.White,
-      floatingActionButton: GradientFAB(
-        onPressed: () {
-          Navigator.pushNamed(context, '/generate');
-        },
-        iconPath: 'assets/icons/ic_add.svg',
-      ),
+      floatingActionButton: GradientFabMenu(menuItems: menuItems),
       body: SafeArea(
         top: true,
         child: Column(
