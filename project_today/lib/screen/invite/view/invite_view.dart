@@ -32,7 +32,8 @@ class InviteView extends StatelessWidget {
             name: participateGroup.ownerName,
             topText: "님 외 ${participateGroup.memberCount - 1}명이",
             bottomText: "오늘을 교환하고 싶어해요",
-            showGradientBox: true,
+            imgPath: 'assets/images/cover/group_${participateGroup.image}.png',
+            imgWidth: 229,
             rules: [
               {'content': participateGroup.description},
             ],
