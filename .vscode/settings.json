@@ -1,0 +1,34 @@
+{
+  "better-comments.tags": [
+    {
+      "tag": "@param",
+      "color": "#00ffff", // 하늘색
+      "strikethrough": false,
+      "underline": false
+    },
+    {
+      "tag": "@return",
+      "color": "#ffff00", // 노란색
+      "strikethrough": false,
+      "underline": false
+    },
+    {
+      "tag": "TODO",
+      "color": "#00ff00", // 초록색
+      "strikethrough": false,
+      "underline": true
+    },
+    {
+      "tag": "!",
+      "color": "#ff0000", // 빨간색
+      "strikethrough": false,
+      "underline": false
+    },
+    {
+      "tag": "?",
+      "color": "#00ffff", // 하늘색
+      "strikethrough": false,
+      "underline": false
+    }
+  ]
+}

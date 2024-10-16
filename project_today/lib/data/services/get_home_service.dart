@@ -15,7 +15,11 @@ class GetHomeService {
     return '/shareGroups/$groupId/home';
   }
 
-  ///그룹 상태 조회 GET
+  ///그룹 상태 조회 GET <br />
+  /// @param [int] groupId - 조회할 shareGroupId <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰 <br />
+  ///
+  /// @return [http.Response] 서버 응답의 data 필드 <br />
   Future<GroupStatus> fetchGroupStatus(int groupId, String accessToken) async {
     try {
       final response = await _apiService.get(
@@ -32,7 +36,11 @@ class GetHomeService {
     }
   }
 
-  ///그룹 조회 GET
+  ///그룹 조회 GET <br />
+  /// @param [int] groupId - 조회할 shareGroupId <br />
+  /// @param [String] accessToken - 인증을 위한 액세스 토큰 <br />
+  ///
+  /// @return [http.Response] 서버 응답의 data 필드 <br />
   Future<HomeResponse> fetchGroupHome(int groupId, String accessToken) async {
     try {
       final response = await _apiService.get(
