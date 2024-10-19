@@ -82,15 +82,18 @@ class CustomToastManager {
     _overlayEntry?.remove();
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        bottom: 50.0,
-        left: MediaQuery.of(context).size.width * 0.1,
-        right: MediaQuery.of(context).size.width * 0.1,
-        child: Material(
-          color: Colors.transparent,
-          child: CustomToast(
-            text: message,
-            type: type,
-            duration: duration,
+        bottom: 100.0,
+        left: 0,
+        right: 0,
+        child: Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: CustomToast(
+              text: message,
+              type: type,
+              duration: duration,
+            ),
           ),
         ),
       ),
