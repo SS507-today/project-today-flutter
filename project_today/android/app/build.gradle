@@ -25,7 +25,7 @@ if (flutterVersionName == null) {
 
 def dotenv = new Properties()
 //TODO 상대경로 변경
-def envFile = file("/Users/kweonsikyung/Documents/project-today-flutter/project_today/assets/config/.env")
+def envFile = file("C:/Users/parks/AndroidStudioProjects/project-today-flutter/project_today/assets/config/.env")
 
 if (envFile.exists()) {
     envFile.withInputStream { stream -> dotenv.load(stream) } 
