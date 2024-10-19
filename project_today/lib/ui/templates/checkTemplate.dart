@@ -34,7 +34,7 @@ class Checktemplate extends StatelessWidget {
               showBackButton: true,
               showCompleteIcon: true,
               onCompleteIconPressed: () {
-                onCompleteIconPressed;
+                onCompleteIconPressed?.call();
                 Navigator.of(context).pop({});
               },
             ),
