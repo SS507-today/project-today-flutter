@@ -3,7 +3,6 @@ import 'package:project_today/core/constant/index.dart';
 import 'package:project_today/screen/collection/view/collection_view.dart';
 import 'package:project_today/screen/member/view/member_view.dart';
 import 'package:project_today/ui/organisms/index.dart';
-import 'package:project_today/screen/member/member_screens.dart';
 
 class Tabbartemplate extends StatelessWidget {
   /// 헤더에 들어갈 타이틀

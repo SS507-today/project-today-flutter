@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/ui/organisms/header.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 
 class ChangeTemplate extends StatelessWidget {
   final bool isButtonActive;
