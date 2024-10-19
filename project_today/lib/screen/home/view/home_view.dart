@@ -4,6 +4,8 @@ import 'package:project_today/screen/home/diary_screens.dart';
 import 'package:project_today/screen/home/timer_screens.dart';
 import 'package:project_today/screen/home/waiting_screens.dart';
 import 'package:project_today/screen/home/view_model/home_view_model.dart';
+import 'package:project_today/data/repositories/current_group_id_repository.dart'
+    as globals;
 
 ///교환일기 홈 - 상태에 따라 스크린 분기 (diary, timer, waiting)
 class HomeView extends StatelessWidget {
@@ -18,6 +20,9 @@ class HomeView extends StatelessWidget {
       child: Scaffold(
         body: Consumer<HomeViewModel>(
           builder: (context, viewModel, child) {
+            globals.currentGroupId.value = groupId;
+            print("현재 그룹 id: ${globals.currentGroupId}");
+
             // 데이터 로딩 중일 때 로딩 인디케이터 표시
             if (viewModel.isLoading) {
               return Center(child: CircularProgressIndicator());

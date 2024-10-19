@@ -16,12 +16,15 @@ class WaitingView extends StatelessWidget {
       topText: "님이 일기를 쓰고 있어요",
       bottomText: "눌러서 재촉해보세요!",
       imgPath: 'assets/images/kock.png',
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, '/prev');
+      },
       profileData: ProfileData(
         imgPath: viewModel.currentWriter?.image ?? '',
         title: viewModel.currentWriter?.name ?? '알 수 없음',
         desc: viewModel.currentWriter?.description ?? '설명 없음',
       ),
+      buttonText: "지난 일기장",
     );
   }
 }

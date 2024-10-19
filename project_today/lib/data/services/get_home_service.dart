@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:project_today/data/models/index.dart';
 import 'package:project_today/data/models/home_model.dart';
 import 'package:project_today/data/models/group_status_model.dart';
 import 'package:project_today/data/services/api_service.dart';
@@ -13,6 +14,10 @@ class GetHomeService {
 
   String _buildHomeEndpoint(int groupId) {
     return '/shareGroups/$groupId/home';
+  }
+
+  String _buildGroupEndpoint(int groupId) {
+    return '/shareGroups/$groupId';
   }
 
   ///그룹 상태 조회 GET <br />
@@ -54,6 +59,21 @@ class GetHomeService {
     } catch (e) {
       print('Error fetching Group Home: $e');
       throw Exception('Failed to load Group Home: $e');
+    }
+  }
+
+  Future<SingleGroupModel> fetchGroup(int groupId, String accessToken) async {
+    try {
+      final response = await _apiService.get(
+        _buildGroupEndpoint(groupId),
+        accessToken: accessToken,
+      );
+      final responseData = json.decode(utf8.decode(response.bodyBytes));
+
+      return SingleGroupModel.fromJson(responseData['data']);
+    } catch (e) {
+      print('Error fetching Group: $e');
+      throw Exception('Failed to load Group: $e');
     }
   }
 }
