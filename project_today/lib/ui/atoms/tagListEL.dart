@@ -41,7 +41,7 @@ class _TagListElState extends State<TagListEl> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: AssetImage(widget.imgPath),
+                    image: NetworkImage(widget.imgPath),
                     fit: BoxFit.cover,
                   ),
                 ),
