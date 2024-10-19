@@ -13,6 +13,8 @@ class Header extends StatelessWidget {
   final String? barImage;
 
   final VoidCallback? onCompleteIconPressed;
+  final VoidCallback? onSettingsIconPressed;
+
   const Header({
     super.key,
     this.backgroundColor = ColorSystem.White,
@@ -23,6 +25,7 @@ class Header extends StatelessWidget {
     this.showCompleteIcon = false,
     this.barImage,
     this.onCompleteIconPressed,
+    this.onSettingsIconPressed,
   });
 
   @override
@@ -74,9 +77,10 @@ class Header extends StatelessWidget {
                   ),
                 if (showSettingsIcon)
                   ImgButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/setting');
-                    },
+                    onPressed: onSettingsIconPressed ??
+                        () {
+                          Navigator.pushNamed(context, '/groupsetting');
+                        },
                     iconPath: 'assets/icons/ic_setting.svg',
                   ),
                 if (showCompleteIcon)
