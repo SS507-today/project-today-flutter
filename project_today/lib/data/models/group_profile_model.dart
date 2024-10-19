@@ -1,29 +1,30 @@
 /// 그룹 프로필 모델 정의
 // /profiles/{profileId}, /profiles/profileListInfo, /profiles/my 조회할 때
+
 class GroupProfile {
   /// 공유 그룹 ID
-  final int shareGroupId;
+  int shareGroupId;
 
   /// 프로필 ID
-  final int profileId;
+  int profileId;
 
   /// 프로필 닉네임
-  final String profileNickName;
+  String profileNickName;
 
   /// 설명
-  final String description;
+  String description;
 
   /// 프로필 이미지 URL
-  final String image;
+  String image;
 
   /// 역할
-  final String role;
+  String role;
 
   /// 가입 일자
-  final String joinedAt;
+  String joinedAt;
 
   /// 내 차례 여부
-  final bool myTurn;
+  bool myTurn;
 
   GroupProfile({
     required this.shareGroupId,
