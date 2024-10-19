@@ -21,6 +21,7 @@ class SettingView extends StatelessWidget {
             // 닉네임이 변경된 후 사용자 정보 갱신
             _userController.fetchUserInfo();
           },
+          isGroupSetting: false,
           onLogout: _onLogout,
         );
       }),

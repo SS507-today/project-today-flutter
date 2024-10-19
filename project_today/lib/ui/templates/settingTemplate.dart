@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
 import 'dart:io'; // File을 다루기 위해 필요
 import 'package:flutter_svg/svg.dart';
+import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/ui/organisms/header.dart';
 import 'package:project_today/ui/atoms/atoms.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SettingTemplate extends StatelessWidget {
   final String? image;
-  // final VoidCallback onImagePick;
   final VoidCallback onChangeNickname;
-  final VoidCallback onLogout;
+  final VoidCallback? onLogout; // 로그아웃 콜백 함수도 선택적으로 받음
   final String nickname;
+
+  // 새로운 콜백 함수 추가
+  final VoidCallback? onFirstOption;
+  final String? desc;
+  final VoidCallback? onSecondOption;
+  final VoidCallback? onThirdOption;
+
+  // isGroupSetting 기본값 true
+  final bool isGroupSetting;
 
   const SettingTemplate({
     required this.image,
-    //  required this.onImagePick,
     required this.onChangeNickname,
-    required this.onLogout,
+    this.onLogout, // 선택적 로그아웃 콜백
     required this.nickname,
+    this.onFirstOption,
+    this.desc,
+    this.onSecondOption,
+    this.onThirdOption,
+    this.isGroupSetting = true, // 기본값 설정
   });
 
   @override
@@ -44,42 +57,53 @@ class SettingTemplate extends StatelessWidget {
                         CircleAvatar(
                           radius: 50,
                           backgroundImage: image != null && image!.isNotEmpty
-                              ? NetworkImage(
-                                  image!) // image가 null이 아니고 비어있지 않다면 NetworkImage 사용
-                              : AssetImage('assets/images/i1.png')
-                                  as ImageProvider, // 그렇지 않다면 기본 이미지 사용
+                              ? NetworkImage(image!)
+                              : AssetImage('assets/images/empty.png')
+                                  as ImageProvider,
                           backgroundColor: Colors.grey[300],
                         ),
-                        /*  Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: onImagePick,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: SvgPicture.asset(
-                                'assets/icons/ic_cam.svg',
-                                width: 34.0,
-                                height: 34.0,
-                              ),
-                            ),
-                          ),
-                        ),*/
                       ],
                     ),
                   ),
                   DefaultListEl(
-                    title: '닉네임 변경',
+                    title: '닉네임',
                     desc: nickname,
                     onPressed: onChangeNickname,
                     isShowArrow: true,
                   ),
                   SizedBox(height: 14),
-                  DefaultListEl(
-                    title: '로그아웃',
-                    onPressed: onLogout,
-                    isShowArrow: false,
-                  ),
+
+                  // isGroupSetting이 false일 경우 로그아웃 버튼과 콜백 표시
+                  if (!isGroupSetting)
+                    DefaultListEl(
+                      title: '로그아웃',
+                      onPressed: onLogout ?? () {},
+                      isShowArrow: false,
+                    ),
+
+                  // isGroupSetting이 true일 경우 추가된 항목 표시
+                  if (isGroupSetting) ...[
+                    DefaultListEl(
+                      title: '소개',
+                      onPressed: onFirstOption ?? () {},
+                      desc: desc,
+                      isShowArrow: true,
+                    ),
+                    SizedBox(height: 14),
+                    DefaultListEl(
+                      title: '그룹 설정 변경',
+                      onPressed: onSecondOption ?? () {},
+                      isShowArrow: true,
+                    ),
+                    SizedBox(height: 14),
+                    DefaultListEl(
+                      title: '그룹 탈퇴',
+                      titleColor: ColorSystem.Red,
+                      onPressed: onThirdOption ?? () {},
+                      isShowArrow: true,
+                    ),
+                    SizedBox(height: 14),
+                  ],
                 ],
               ),
             ),
