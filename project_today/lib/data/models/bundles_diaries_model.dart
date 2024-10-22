@@ -1,4 +1,4 @@
-/// 특정 번들에 속한 다이어리 목록을 최신순으로 조회하는 모델 클래스
+// 특정 번들에 속한 다이어리 목록을 최신순으로 조회하는 모델 클래스
 /// '/bundles/$bundleId/diaries?shareGroupId=$shareGroupId' 조회 시 사용
 class BundlesDiaries {
   /// 공유 그룹 ID
@@ -18,10 +18,25 @@ class BundlesDiaries {
 
   /// JSON 데이터를 BundlesDiaries 객체로 변환하는 팩토리 생성자
   factory BundlesDiaries.fromJson(Map<String, dynamic> json) {
+    var diariesData = json['diaries'];
+
+    List<Diary> diariesList = [];
+
+    if (diariesData is List) {
+      // diariesData가 리스트인 경우
+      diariesList = diariesData.map((x) {
+        print("Parsing individual diary: $x");
+        return Diary.fromJson(x as Map<String, dynamic>);
+      }).toList();
+    } else {
+      // diariesData가 리스트가 아닌 경우 예외처리
+      print("Unexpected type for 'diaries': ${diariesData.runtimeType}");
+    }
+
     return BundlesDiaries(
       shareGroupId: json['shareGroupId'],
       bundleId: json['bundleId'],
-      diaries: List<Diary>.from(json['diaries'].map((x) => Diary.fromJson(x))),
+      diaries: diariesList,
     );
   }
 
@@ -68,20 +83,23 @@ class Diary {
     required this.createdAt,
   });
 
-  /// JSON 데이터를 Diary 객체로 변환하는 팩토리 생성자
   factory Diary.fromJson(Map<String, dynamic> json) {
     return Diary(
-      diaryId: json['diaryId'],
-      writerProfileId: json['writerProfileId'],
-      writerProfileImage: json['writerProfileImage'],
-      writerNickname: json['writerNickname'],
-      writerDescription: json['writerDescription'],
-      finalDiaryImage: json['finalDiaryImage'],
-      createdAt: json['createdAt'],
+      diaryId: json['diaryId'] as int? ?? 0,
+      writerProfileId: json['writerProfileId'] as int? ?? 0,
+      writerProfileImage: json['writerProfileImage'] as String? ?? '',
+      writerNickname: json['writerNickname'] as String? ?? '',
+      writerDescription: json['writerDescription'] as String? ?? '',
+      finalDiaryImage: json['finalDiaryImage'] as String? ?? '',
+      createdAt: json['createdAt'] as String? ?? '',
     );
   }
 
-  /// Diary 객체를 JSON 형식으로 변환하는 메서드
+  @override
+  String toString() {
+    return 'Diary(diaryId: $diaryId, writerProfileId: $writerProfileId, writerProfileImage: $writerProfileImage, writerNickname: $writerNickname, finalDiaryImage: $finalDiaryImage, createdAt: $createdAt)';
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'diaryId': diaryId,

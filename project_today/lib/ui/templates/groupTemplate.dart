@@ -38,6 +38,9 @@ class GroupTemplate extends StatelessWidget {
             Header(
               showNotificationIcon: true,
               showSettingsIcon: true,
+              onSettingsIconPressed: () {
+                Navigator.pushNamed(context, '/setting');
+              },
               barImage: 'assets/images/img_logo.png',
             ),
             Expanded(

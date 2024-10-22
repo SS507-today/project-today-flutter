@@ -56,3 +56,54 @@ class CustomToast extends StatelessWidget {
     );
   }
 }
+
+class CustomToastManager {
+  static final CustomToastManager _instance = CustomToastManager._internal();
+  late OverlayState _overlayState;
+  OverlayEntry? _overlayEntry;
+
+  factory CustomToastManager() {
+    return _instance;
+  }
+
+  CustomToastManager._internal();
+
+  // 초기화 함수: 앱 시작 시 호출하여 Overlay 상태를 저장
+  void init(BuildContext context) {
+    _overlayState = Overlay.of(context)!;
+  }
+
+  // 토스트 메시지를 표시하는 함수
+  void showCustomToast({
+    required String message,
+    required ToastType type,
+    int duration = 3000, // Default duration of 3 seconds
+  }) {
+    _overlayEntry?.remove();
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 100.0,
+        left: 0,
+        right: 0,
+        child: Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: CustomToast(
+              text: message,
+              type: type,
+              duration: duration,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    _overlayState.insert(_overlayEntry!);
+
+    Future.delayed(Duration(milliseconds: duration), () {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    });
+  }
+}

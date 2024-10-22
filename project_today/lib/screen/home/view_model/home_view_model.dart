@@ -4,11 +4,14 @@ import 'package:project_today/data/models/home_model.dart';
 import 'package:project_today/data/models/group_status_model.dart';
 import 'package:project_today/data/services/get_home_service.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
+import 'package:project_today/data/repositories/bundles_repository.dart';
+import 'package:project_today/data/models/bundles_model.dart';
 
 ///교환일기 홈 - 분기되는 뷰에 대한 모든 정보를 가져옴 (diary, timer, waiting)
 class HomeViewModel extends ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
   final GetHomeService _diaryService = GetHomeService();
+  final BundleRepository _bundleRepository = BundleRepository();
 
   GroupStatus? _groupStatus;
   HomeResponse? _diaryResponse;
@@ -21,6 +24,14 @@ class HomeViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasError => _hasError;
   String get errorMessage => _errorMessage;
+
+  // 번들 리스트와 커버 이미지를 위한 상태 변수
+  List<BundleInfo> _bundlesList = [];
+  int _coverImage = 0;
+
+  // Getter for UI access
+  List<BundleInfo> get bundlesList => _bundlesList;
+  int get coverImage => _coverImage;
 
   List<Map<String, String?>> get formattedRules {
     if (_diaryResponse != null &&
@@ -81,6 +92,7 @@ class HomeViewModel extends ChangeNotifier {
       await fetchGroupStatus(groupId, accessToken);
       if (_groupStatus?.status == 'ACTIVE') {
         await fetchGroupHome(groupId, accessToken);
+        await fetchBundles(groupId);
       }
     } catch (e) {
       _hasError = true;
@@ -109,6 +121,35 @@ class HomeViewModel extends ChangeNotifier {
       _diaryResponse = await _diaryService.fetchGroupHome(groupId, accessToken);
     } catch (e) {
       throw Exception('홈 화면 정보를 불러오는데 실패했습니다.');
+    }
+  }
+
+  Future<void> fetchBundles(int groupId) async {
+    final tokens = await _authRepository.loadTokens();
+    final String? accessToken = tokens['jwtAccessToken'];
+
+    if (accessToken != null) {
+      _isLoading = true;
+      notifyListeners();
+
+      try {
+        final bundleResponse =
+            await _bundleRepository.fetchBundles(groupId, 0, 100, accessToken);
+
+        if (bundleResponse != null) {
+          _bundlesList = bundleResponse.bundleInfoList;
+          _coverImage = bundleResponse.coverImage;
+        } else {
+          _errorMessage = "번들 정보를 불러오는 데 실패했습니다.";
+          _hasError = true;
+        }
+      } catch (e) {
+        _errorMessage = "번들 정보를 가져오는 중 오류 발생: $e";
+        _hasError = true;
+      } finally {
+        _isLoading = false;
+        notifyListeners();
+      }
     }
   }
 }

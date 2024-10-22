@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/index.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 
 class TagBottomSheet extends StatelessWidget {
   /// 멤버들의 정보가 담긴 리스트 (최대 5명)

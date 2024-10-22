@@ -20,7 +20,7 @@ class CustomImageCarousel extends StatefulWidget {
     required this.imageUrls,
     this.viewportFraction = 0.618,
     this.height = 324,
-    this.onPageChanged, // onPageChanged 콜백 추가
+    this.onPageChanged,
   }) : super(key: key);
 
   @override
@@ -57,22 +57,34 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
             itemCount: widget.imageUrls.length,
             onPageChanged: (index) {
               if (widget.onPageChanged != null) {
-                widget.onPageChanged!(index); // 페이지 변경 시 부모에게 알림
+                widget.onPageChanged!(index);
               }
             },
             itemBuilder: (context, index) {
+              String imageUrl = widget.imageUrls[index];
               return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey.shade200, // 이미지를 불러오기 전의 배경색
+                  color: Colors.grey.shade200,
                 ),
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.network(
-                    widget.imageUrls[index],
-                    fit: BoxFit.cover,
-                  ),
+                  child: imageUrl.isNotEmpty
+                      ? Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/empty.png',
+                              fit: BoxFit.cover,
+                            ); // 기본 이미지 표시
+                          },
+                        )
+                      : Image.asset(
+                          'assets/images/empty.png',
+                          fit: BoxFit.cover,
+                        ), // 경로가 비어 있으면 기본 이미지 표시
                 ),
               );
             },

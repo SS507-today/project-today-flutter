@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/index.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 import 'package:project_today/ui/molecules/index.dart';
 import 'package:project_today/ui/organisms/index.dart';
 
@@ -34,7 +34,7 @@ class Checktemplate extends StatelessWidget {
               showBackButton: true,
               showCompleteIcon: true,
               onCompleteIconPressed: () {
-                onCompleteIconPressed;
+                onCompleteIconPressed?.call();
                 Navigator.of(context).pop({});
               },
             ),

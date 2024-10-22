@@ -5,6 +5,9 @@ class DefaultListEl extends StatelessWidget {
   /// 요소 매인 텍스트
   final String title;
 
+  /// 타이틀 컬러
+  final Color titleColor;
+
   /// 요소 설명 텍스트
   final String? desc;
 
@@ -16,6 +19,7 @@ class DefaultListEl extends StatelessWidget {
 
   const DefaultListEl({
     super.key,
+    this.titleColor = GreyColorSystem.Grey80,
     required this.title,
     required this.onPressed,
     this.desc,
@@ -46,7 +50,7 @@ class DefaultListEl extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
-                color: GreyColorSystem.Grey80,
+                color: titleColor,
               ),
             ),
             Row(

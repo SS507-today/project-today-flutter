@@ -1,71 +1,81 @@
-/// 다이어리에 태그된 멤버 목록을 나타내는 모델 클래스
-class TaggedMembersModel {
-  /// 다이어리 ID
-  final int diaryId;
+/// 번들 목록 모델 정의
+class BundleModel {
+  final int shareGroupId; // 공유 그룹 ID
+  final List<BundleInfo> bundleInfoList; // 번들 정보 리스트
+  final int coverImage; // 커버 이미지 ID
+  final int page; // 페이지 번호
+  final int totalElements; // 전체 요소 수
+  final bool first; // 첫 번째 페이지 여부
+  final bool last; // 마지막 페이지 여부
 
-  /// 태그된 멤버들의 리스트
-  final List<TaggedMember> taggedMembersList;
-
-  TaggedMembersModel({
-    required this.diaryId,
-    required this.taggedMembersList,
+  BundleModel({
+    required this.shareGroupId,
+    required this.bundleInfoList,
+    required this.coverImage,
+    required this.page,
+    required this.totalElements,
+    required this.first,
+    required this.last,
   });
 
-  /// JSON 데이터를 `TaggedMembersModel` 객체로 변환하는 팩토리 생성자
-  factory TaggedMembersModel.fromJson(Map<String, dynamic> json) {
-    return TaggedMembersModel(
-      diaryId: json['diaryId'], // JSON에서 'diaryId' 값을 가져와 할당
-      taggedMembersList: List<TaggedMember>.from(
-        json['taggedMembersList'].map(
-          (member) => TaggedMember.fromJson(member),
-        ),
-      ), // JSON에서 'taggedMembersList' 리스트를 변환하여 할당
+  /// JSON 데이터를 BundleModel 객체로 변환하는 팩토리 생성자
+  factory BundleModel.fromJson(Map<String, dynamic> json) {
+    return BundleModel(
+      shareGroupId: json['shareGroupId'],
+      bundleInfoList: List<BundleInfo>.from(
+        json['bundleInfoList'].map((x) => BundleInfo.fromJson(x)),
+      ),
+      coverImage: json['coverImage'],
+      page: json['page'],
+      totalElements: json['totalElements'],
+      first: json['first'],
+      last: json['last'],
     );
   }
 
-  /// `TaggedMembersModel` 객체를 JSON 형식으로 변환하는 메서드
+  /// BundlesModel 객체를 JSON 형식으로 변환하는 메서드
   Map<String, dynamic> toJson() {
     return {
-      'diaryId': diaryId, // 'diaryId' 값을 JSON 필드로 변환
-      'taggedMembersList': List<dynamic>.from(
-        taggedMembersList.map((member) => member.toJson()),
-      ), // 'taggedMembersList'를 JSON 리스트로 변환
+      'shareGroupId': shareGroupId,
+      'bundleInfoList': List<dynamic>.from(
+        bundleInfoList.map((x) => x.toJson()),
+      ),
+      'coverImage': coverImage,
+      'page': page,
+      'totalElements': totalElements,
+      'first': first,
+      'last': last,
     };
   }
 }
 
-/// 개별 태그된 멤버를 나타내는 모델 클래스
-class TaggedMember {
-  /// 프로필 ID
-  final int profileId;
+/// 번들 정보 모델 클래스 정의
+class BundleInfo {
+  final int bundleId; // 번들 ID
+  final String startDate; // 시작 날짜
+  final String endDate; // 종료 날짜
 
-  /// 멤버 이름
-  final String name;
-
-  /// 멤버 프로필 이미지
-  final String image;
-
-  TaggedMember({
-    required this.profileId,
-    required this.name,
-    required this.image,
+  BundleInfo({
+    required this.bundleId,
+    required this.startDate,
+    required this.endDate,
   });
 
-  /// JSON 데이터를 `TaggedMember` 객체로 변환하는 팩토리 생성자
-  factory TaggedMember.fromJson(Map<String, dynamic> json) {
-    return TaggedMember(
-      profileId: json['profileId'], // JSON에서 'profileId' 값을 가져와 할당
-      name: json['name'], // JSON에서 'name' 값을 가져와 할당
-      image: json['image'], // JSON에서 'image' 값을 가져와 할당
+  /// JSON 데이터를 BundleInfo 객체로 변환하는 팩토리 생성자
+  factory BundleInfo.fromJson(Map<String, dynamic> json) {
+    return BundleInfo(
+      bundleId: json['bundleId'],
+      startDate: json['startDate'],
+      endDate: json['endDate'],
     );
   }
 
-  /// `TaggedMember` 객체를 JSON 형식으로 변환하는 메서드
+  /// BundleInfo 객체를 JSON 형식으로 변환하는 메서드
   Map<String, dynamic> toJson() {
     return {
-      'profileId': profileId, // 'profileId' 값을 JSON 필드로 변환
-      'name': name, // 'name' 값을 JSON 필드로 변환
-      'image': image, // 'image' 값을 JSON 필드로 변환
+      'bundleId': bundleId,
+      'startDate': startDate,
+      'endDate': endDate,
     };
   }
 }
