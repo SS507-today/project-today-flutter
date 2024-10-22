@@ -10,7 +10,7 @@ import 'package:project_today/data/repositories/member_repository.dart';
 import 'package:project_today/data/repositories/current_group_id_repository.dart'
     as globals;
 import 'package:project_today/data/models/index.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 
 class CheckViewModel extends GetxController {
   final BundlesPresignedService _presignedService = BundlesPresignedService();

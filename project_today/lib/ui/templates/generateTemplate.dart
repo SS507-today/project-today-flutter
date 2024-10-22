@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 import 'package:project_today/ui/organisms/index.dart';
 
 class GenerateTemplate extends StatelessWidget {

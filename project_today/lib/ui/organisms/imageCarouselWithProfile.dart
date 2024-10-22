@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/index.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 import 'package:project_today/ui/molecules/index.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 import 'package:project_today/ui/templates/index.dart';
 import 'package:project_today/ui/organisms/index.dart';
 import 'package:project_today/screen/read/view_model/read_view_model.dart';

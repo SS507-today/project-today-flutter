@@ -3,7 +3,7 @@ import 'dart:io'; // File을 다루기 위해 필요
 import 'package:flutter_svg/svg.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/ui/organisms/header.dart';
-import 'package:project_today/ui/atoms/atoms.dart';
+import 'package:project_today/ui/atoms/index.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SettingTemplate extends StatelessWidget {

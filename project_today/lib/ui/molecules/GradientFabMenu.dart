@@ -68,7 +68,7 @@ class _GradientFabMenuState extends State<GradientFabMenu>
         GradientFAB(
           onPressed: _toggleMenu, // 메뉴 열고 닫는 동작
           iconPath: _isMenuOpen
-              ? 'assets/icons/ic_close.svg'
+              ? 'assets/icons/ic_add.svg'
               : 'assets/icons/ic_add.svg', // 열릴 때는 X 아이콘, 닫힐 때는 + 아이콘
         ),
       ],
