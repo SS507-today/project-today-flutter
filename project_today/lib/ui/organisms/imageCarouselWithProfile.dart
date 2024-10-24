@@ -28,30 +28,10 @@ class ImageCarouselWithProfile extends StatefulWidget {
 
 class _ImageCarouselWithProfileState extends State<ImageCarouselWithProfile> {
   int currentPageIndex = 0;
-  bool _enabled = true;
 
   void onPageChanged(int index) {
     setState(() {
       currentPageIndex = index;
-
-      _enabled = true;
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          _enabled = false;
-        });
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    // 2초 후에 _enabled를 false로 설정
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        _enabled = false;
-      });
     });
   }
 
@@ -77,16 +57,16 @@ class _ImageCarouselWithProfileState extends State<ImageCarouselWithProfile> {
         /// 일기 작성자 프로필
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 43, 20, 0),
-          child: Skeletonizer(
-            enabled: _enabled,
-            enableSwitchAnimation: true,
-            child: ImgListEl(
-              imgPath: widget.userInfo[currentPageIndex]['imgPath']!,
-              title: widget.userInfo[currentPageIndex]['name']!,
-              desc: widget.userInfo[currentPageIndex]['role']!,
-              onPressed: () {},
-            ),
+          // child: Skeletonizer(
+          //  enabled: _enabled,
+          //  enableSwitchAnimation: true,
+          child: ImgListEl(
+            imgPath: widget.userInfo[currentPageIndex]['imgPath']!,
+            title: widget.userInfo[currentPageIndex]['name']!,
+            desc: widget.userInfo[currentPageIndex]['role']!,
+            onPressed: () {},
           ),
+          //  ),
         ),
       ],
     );
