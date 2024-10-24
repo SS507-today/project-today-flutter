@@ -12,7 +12,10 @@ class RuleCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: rules.map((rule) {
+      children: rules
+          .where(
+              (rule) => rule['content'] != null && rule['content']!.isNotEmpty)
+          .map((rule) {
         return Padding(
           padding: const EdgeInsets.only(top: 10), // 각 RuleCard 사이 간격
           child: RuleCardListEl(
