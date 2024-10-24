@@ -125,8 +125,10 @@ class CheckViewModel extends GetxController {
 
           if (diaryUploadResponse != null) {
             if (diaryUploadResponse['status'] == 200) {
-              String successMessage =
-                  diaryUploadResponse['message'] ?? '다이어리 업로드 성공';
+              String successMessage = utf8.decode(
+                    diaryUploadResponse['message'].runes.toList(),
+                  ) ??
+                  '다이어리 업로드 성공';
               print("Diary upload successful: $successMessage");
               CustomToastManager().showCustomToast(
                 message: successMessage,
