@@ -3,8 +3,12 @@ import 'package:project_today/ui/atoms/VerticalCard.dart';
 
 class ExpandedGridView extends StatelessWidget {
   final List<Map<String, dynamic>> groupData;
+  final bool isLoading;
 
-  const ExpandedGridView({required this.groupData});
+  const ExpandedGridView({
+    required this.groupData,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class ExpandedGridView extends StatelessWidget {
       child: GridView.builder(
         padding: const EdgeInsets.all(20), // 좌우 패딩 추가
         itemCount: groupData.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
@@ -33,6 +37,7 @@ class ExpandedGridView extends StatelessWidget {
                 },
               );
             },
+            isLoading: isLoading,
           );
         },
       ),
