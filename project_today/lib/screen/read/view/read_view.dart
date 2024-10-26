@@ -7,6 +7,7 @@ import 'package:project_today/ui/organisms/index.dart';
 import 'package:project_today/screen/read/view_model/read_view_model.dart';
 import 'package:project_today/data/repositories/current_group_id_repository.dart'
     as globals;
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ReadView extends StatefulWidget {
   const ReadView({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class ReadView extends StatefulWidget {
 }
 
 class _ReadViewState extends State<ReadView> {
-  final ReadViewModel _readViewModel = Get.put(ReadViewModel());
+  final ReadViewModel _viewModel = Get.put(ReadViewModel());
   bool _isInitialized = false;
 
   @override
@@ -35,7 +36,7 @@ class _ReadViewState extends State<ReadView> {
         final shareGroupId = globals.currentGroupId.value; // RxInt로 접근
 
         if (bundleId != null) {
-          _readViewModel.fetchDiaryData(bundleId, shareGroupId);
+          _viewModel.fetchDiaryData(bundleId, shareGroupId);
         } else {
           print("번들 ID가 없습니다.");
         }
@@ -61,11 +62,9 @@ class _ReadViewState extends State<ReadView> {
       body: SafeArea(
         top: true,
         child: Obx(() {
-          if (_readViewModel.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
-          }
+          final isLoading = _viewModel.isLoading.value;
 
-          final diaries = _readViewModel.diaries;
+          final diaries = _viewModel.diaries;
           //TODO : 서버에 요청해서 isWrited 받아오기
           // 일기 데이터가 없을 때
           if (diaries.isEmpty) {
@@ -101,15 +100,17 @@ class _ReadViewState extends State<ReadView> {
             };
           }).toList();
 
-          return ReadTemplates(
-            dates: dates,
-            imageUrls: imageUrls,
-            userInfo: userInfo,
-            showButton: isWeek, // ModalRoute에서 받은 isWeek를 showButton에 전달
-            onWriteButtonPressed: () {
-              Navigator.pushNamed(context, '/write');
-            },
-          );
+          return Skeletonizer(
+              enabled: isLoading, // 로딩 중일 때 Skeletonizer 활성화
+              child: ReadTemplates(
+                dates: dates,
+                imageUrls: imageUrls,
+                userInfo: userInfo,
+                showButton: isWeek, // ModalRoute에서 받은 isWeek를 showButton에 전달
+                onWriteButtonPressed: () {
+                  Navigator.pushNamed(context, '/write');
+                },
+              ));
         }),
       ),
     );

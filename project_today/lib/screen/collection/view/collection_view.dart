@@ -3,7 +3,24 @@ import 'package:get/get.dart';
 import 'package:project_today/screen/collection/view_model/collection_view_model.dart';
 import 'package:project_today/ui/organisms/index.dart';
 
-class CollectionView extends StatelessWidget {
+class CollectionView extends StatefulWidget {
+  @override
+  _CollectionViewState createState() => _CollectionViewState();
+}
+
+class _CollectionViewState extends State<CollectionView> {
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 300), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
+
   final CollectionViewModel _collectionViewModel =
       Get.put(CollectionViewModel());
 
@@ -11,10 +28,6 @@ class CollectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        if (_collectionViewModel.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        }
-
         // 첫 번째 번들을 제외하고 리스트를 생성
         final bundles = _collectionViewModel.bundlesList.length > 1
             ? _collectionViewModel.bundlesList.sublist(1) // 첫 번째 번들 제외
@@ -32,7 +45,10 @@ class CollectionView extends StatelessWidget {
 
         return bundles.isEmpty
             ? Center(child: Text('번들이 없습니다.')) // 번들이 없을 때 대체 메시지
-            : ExpandedGridView(groupData: bundleData);
+            : ExpandedGridView(
+                groupData: bundleData,
+                isLoading: isLoading,
+              );
       }),
     );
   }

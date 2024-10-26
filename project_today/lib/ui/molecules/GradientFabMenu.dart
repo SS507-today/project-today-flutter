@@ -56,21 +56,16 @@ class _GradientFabMenuState extends State<GradientFabMenu>
           ...widget.menuItems.map((item) {
             return _buildMenuButton(
               label: item['label'] as String,
-              bgColor: item['bg-color'] as Color, // bgColor 수정
-              fontColor: item['font-color'] as Color, // fontColor 수정
+              bgColor: item['bg-color'] as Color,
+              fontColor: item['font-color'] as Color,
               route: item['route'] as String,
               animationOffset: item['animationOffset'] as int,
               context: context,
             );
           }).toList(),
 
-        // GradientFAB을 사용하여 메뉴 열고 닫기
         GradientFAB(
-          onPressed: _toggleMenu, // 메뉴 열고 닫는 동작
-          iconPath: _isMenuOpen
-              ? 'assets/icons/ic_add.svg'
-              : 'assets/icons/ic_add.svg', // 열릴 때는 X 아이콘, 닫힐 때는 + 아이콘
-        ),
+            onPressed: _toggleMenu, iconPath: 'assets/icons/ic_add.svg'),
       ],
     );
   }
@@ -96,6 +91,7 @@ class _GradientFabMenuState extends State<GradientFabMenu>
             style: TextStyle(color: fontColor, fontSize: 16),
           ),
           backgroundColor: bgColor,
+          elevation: 0,
         ),
       ),
     );

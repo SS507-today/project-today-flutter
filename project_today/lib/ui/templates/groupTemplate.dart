@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:project_today/core/constant/colors.dart';
-import 'package:project_today/ui/molecules/gradientFabMenu.dart'; // GradientFabMenu import
+import 'package:project_today/ui/molecules/gradientFabMenu.dart';
 import 'package:project_today/ui/organisms/header.dart';
 import 'package:project_today/ui/atoms/VerticalCard.dart';
 
-class GroupTemplate extends StatelessWidget {
+class GroupTemplate extends StatefulWidget {
   final List<Map<String, dynamic>> groupData;
 
-  const GroupTemplate({required this.groupData});
+  const GroupTemplate({
+    required this.groupData,
+  });
+
+  @override
+  _GroupTemplateState createState() => _GroupTemplateState();
+}
+
+class _GroupTemplateState extends State<GroupTemplate> {
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 200), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +60,9 @@ class GroupTemplate extends StatelessWidget {
               onSettingsIconPressed: () {
                 Navigator.pushNamed(context, '/setting');
               },
-              barImage: 'assets/images/img_logo.png',
             ),
             Expanded(
-              child: groupData.isEmpty
+              child: widget.groupData.isEmpty
                   ? _buildEmptyGroupUI(context)
                   : _buildGroupGrid(context),
             ),
@@ -70,9 +88,9 @@ class GroupTemplate extends StatelessWidget {
         ),
         SizedBox(height: 50),
         Image.asset(
-          'assets/images/img_group.png',
-          width: 256,
-          height: 222,
+          'assets/images/no-group.png',
+          width: double.infinity,
+          height: 244,
         ),
       ],
     );
@@ -97,7 +115,7 @@ class GroupTemplate extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
-              itemCount: groupData.length,
+              itemCount: widget.groupData.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
@@ -105,7 +123,7 @@ class GroupTemplate extends StatelessWidget {
                 childAspectRatio: 0.75, // 카드 비율 설정
               ),
               itemBuilder: (context, index) {
-                final group = groupData[index];
+                final group = widget.groupData[index];
                 return VerticalCard(
                   imgPath: group['imgsrc'] as String,
                   desc: group['desc'] as String,
@@ -116,6 +134,7 @@ class GroupTemplate extends StatelessWidget {
                       arguments: {'id': group['id']}, // id 값을 arguments로 전달
                     );
                   },
+                  isLoading: isLoading,
                 );
               },
             ),

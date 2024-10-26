@@ -17,6 +17,8 @@ class SettingViewModel extends GetxController {
     nickname: '',
   ).obs;
 
+  var isLoading = true.obs; // 로딩 상태
+
   @override
   void onInit() {
     super.onInit();
@@ -32,6 +34,7 @@ class SettingViewModel extends GetxController {
 
   /// Repository를 통해 사용자 정보 가져오기
   Future<void> fetchUserInfo() async {
+    isLoading.value = true; // 데이터 로딩 시작
     final tokens = await _authRepository.loadTokens();
     final String? accessToken = tokens['jwtAccessToken'];
 
@@ -61,5 +64,6 @@ class SettingViewModel extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+    isLoading.value = false; // 데이터 로딩 완료
   }
 }
