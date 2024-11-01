@@ -74,8 +74,8 @@ class VerticalCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 169.0,
-          height: 225.0,
+          width: 185.0,
+          height: 300.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14.0),
             image: DecorationImage(
