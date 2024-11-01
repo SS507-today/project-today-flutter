@@ -48,7 +48,9 @@ class Header extends StatelessWidget {
                     iconPath: 'assets/icons/ic_arrow_left.svg',
                   )
                 : barImage != null
-                    ? Image.asset(barImage!, height: 32)
+                    ? Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: SvgPicture.asset(barImage!, height: 26))
                     : SizedBox.shrink(),
           ),
 
