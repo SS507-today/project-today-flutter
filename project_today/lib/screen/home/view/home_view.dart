@@ -29,8 +29,7 @@ class HomeView extends StatelessWidget {
             }
 
             if (viewModel.hasError) {
-              return Center(
-                  child: Text('오류가 발생했습니다: ${viewModel.errorMessage}'));
+              return Center(child: Text('${viewModel.errorMessage}'));
             }
 
             // 그룹 상태를 확인

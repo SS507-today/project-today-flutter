@@ -6,6 +6,7 @@ import 'package:project_today/data/services/get_home_service.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
 import 'package:project_today/data/repositories/bundles_repository.dart';
 import 'package:project_today/data/models/bundles_model.dart';
+import 'package:project_today/ui/atoms/index.dart';
 
 ///교환일기 홈 - 분기되는 뷰에 대한 모든 정보를 가져옴 (diary, timer, waiting)
 class HomeViewModel extends ChangeNotifier {
@@ -78,10 +79,9 @@ class HomeViewModel extends ChangeNotifier {
     final String? accessToken = tokens['jwtAccessToken'];
 
     if (accessToken == null) {
-      Get.snackbar(
-        "오류",
-        "사용자 정보를 불러오는 중 오류가 발생했습니다.",
-        snackPosition: SnackPosition.BOTTOM,
+      CustomToastManager().showCustomToast(
+        message: "사용자 정보를 불러오는 중 오류가 발생했습니다.",
+        type: ToastType.NEGATIVE,
       );
       _isLoading = false;
       notifyListeners();
@@ -97,10 +97,9 @@ class HomeViewModel extends ChangeNotifier {
     } catch (e) {
       _hasError = true;
       _errorMessage = e.toString();
-      Get.snackbar(
-        "오류",
-        "그룹 상태 또는 홈 정보를 불러오는 중 오류가 발생했습니다: $e",
-        snackPosition: SnackPosition.BOTTOM,
+      CustomToastManager().showCustomToast(
+        message: "$e",
+        type: ToastType.NEGATIVE,
       );
     } finally {
       _isLoading = false;
