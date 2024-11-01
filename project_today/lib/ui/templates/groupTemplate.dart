@@ -48,18 +48,19 @@ class _GroupTemplateState extends State<GroupTemplate> {
     ];
 
     return Scaffold(
-      backgroundColor: ColorSystem.White,
       floatingActionButton: GradientFabMenu(menuItems: menuItems),
       body: SafeArea(
         top: true,
         child: Column(
           children: [
             Header(
+              backgroundColor: Colors.white,
               showNotificationIcon: true,
               showSettingsIcon: true,
               onSettingsIconPressed: () {
                 Navigator.pushNamed(context, '/setting');
               },
+              barImage: 'assets/icons/header_logo.svg',
             ),
             Expanded(
               child: widget.groupData.isEmpty
@@ -97,22 +98,12 @@ class _GroupTemplateState extends State<GroupTemplate> {
   }
 
   Widget _buildGroupGrid(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return Container(
+      color: GreyColorSystem.Grey3,
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0, bottom: 30.0),
-            child: Text(
-              '내 그룹',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: GreyColorSystem.Grey90,
-              ),
-            ),
-          ),
           Expanded(
             child: GridView.builder(
               itemCount: widget.groupData.length,
@@ -120,7 +111,7 @@ class _GroupTemplateState extends State<GroupTemplate> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.75, // 카드 비율 설정
+                childAspectRatio: 0.751, // 카드 비율 설정
               ),
               itemBuilder: (context, index) {
                 final group = widget.groupData[index];
