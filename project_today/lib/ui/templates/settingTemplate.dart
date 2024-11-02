@@ -15,6 +15,8 @@ class SettingTemplate extends StatelessWidget {
   // 새로운 콜백 함수 추가
   final VoidCallback? onFirstOption;
   final String? desc;
+  final String deleteTitle;
+
   final VoidCallback? onSecondOption;
   final VoidCallback? onThirdOption;
 
@@ -28,6 +30,7 @@ class SettingTemplate extends StatelessWidget {
     required this.nickname,
     this.onFirstOption,
     this.desc,
+    this.deleteTitle = '그룹 탈퇴',
     this.onSecondOption,
     this.onThirdOption,
     this.isGroupSetting = true, // 기본값 설정
@@ -106,7 +109,7 @@ class SettingTemplate extends StatelessWidget {
                     ),
                     SizedBox(height: 14),
                     DefaultListEl(
-                      title: '그룹 탈퇴',
+                      title: deleteTitle,
                       titleColor: ColorSystem.Red,
                       onPressed: onThirdOption ?? () {},
                       isShowArrow: true,
