@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:project_today/data/repositories/nickname_repository.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
+import 'package:project_today/ui/atoms/index.dart';
 
 class ChangeViewModel extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
@@ -28,25 +29,23 @@ class ChangeViewModel extends GetxController {
             await _nicknameRepository.setNickName(nickname.value, accessToken!);
 
         if (success) {
+          CustomToastManager().showCustomToast(
+            message: "닉네임 변경 성공",
+            type: ToastType.POSITIVE,
+          );
           Navigator.pop(context);
         } else {
-          showErrorDialog("닉네임 설정에 실패했습니다. 다시 시도해 주세요.");
+          CustomToastManager().showCustomToast(
+            message: "닉네임 설정에 실패했습니다. 다시 시도해 주세요.",
+            type: ToastType.POSITIVE,
+          );
         }
       } catch (e) {
-        showErrorDialog("오류가 발생했습니다: $e");
+        CustomToastManager().showCustomToast(
+          message: "$e",
+          type: ToastType.POSITIVE,
+        );
       }
     }
-  }
-
-  /// 오류 다이얼로그 표시
-  void showErrorDialog(String message) {
-    Get.defaultDialog(
-      title: "오류 발생",
-      middleText: message,
-      textConfirm: "확인",
-      onConfirm: () {
-        Get.back(); // 다이얼로그 닫기
-      },
-    );
   }
 }
