@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:project_today/screen/group/view_model/group_view_model.dart';
 import 'package:project_today/ui/templates/groupTemplate.dart';
 
@@ -12,11 +13,6 @@ class GroupView extends StatelessWidget {
       child: Scaffold(
         body: Consumer<GroupViewModel>(
           builder: (context, viewModel, child) {
-            // 로딩 상태일 때 로딩 인디케이터 표시
-            if (viewModel.isLoading) {
-              return Center(child: CircularProgressIndicator());
-            }
-
             final groupData = viewModel.Groups.map((group) {
               return {
                 'id': group.shareGroupId,
@@ -27,7 +23,9 @@ class GroupView extends StatelessWidget {
               };
             }).toList();
 
-            return GroupTemplate(groupData: groupData);
+            return Skeletonizer(
+                enabled: viewModel.isLoading, // 로딩 중일 때 Skeletonizer 활성화
+                child: GroupTemplate(groupData: groupData));
           },
         ),
       ),

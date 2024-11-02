@@ -11,9 +11,16 @@ class GroupViewModel extends ChangeNotifier {
 
   List<Group> _Groups = [];
   bool _isLoading = false;
+  bool _disposed = false; // dispose 상태 확인 플래그 추가
 
   List<Group> get Groups => _Groups;
   bool get isLoading => _isLoading;
+
+  @override
+  void dispose() {
+    _disposed = true; // dispose 상태 설정
+    super.dispose();
+  }
 
   Future<void> fetchGroups() async {
     final tokens = await _authRepository.loadTokens();
@@ -29,7 +36,7 @@ class GroupViewModel extends ChangeNotifier {
     }
 
     _isLoading = true;
-    notifyListeners();
+    if (!_disposed) notifyListeners(); // dispose 상태가 아닐 때만 알림
 
     try {
       _Groups = await _service.fetchGroups(accessToken);
@@ -42,7 +49,7 @@ class GroupViewModel extends ChangeNotifier {
       );
     } finally {
       _isLoading = false;
-      notifyListeners();
+      if (!_disposed) notifyListeners(); // dispose 상태가 아닐 때만 알림
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
 import 'package:project_today/data/services/auth_service.dart';
+import 'package:project_today/ui/atoms/customToast.dart';
 
 class LoginViewModel extends GetxController {
   final AuthService _authService = AuthService();
@@ -13,7 +14,6 @@ class LoginViewModel extends GetxController {
   Future<void> login(BuildContext context) async {
     isLoading.value = true;
 
-    // 1. 카카오 로그인
     final token = await _authService.loginWithKakao();
     if (token == null) {
       isLoading.value = false;
@@ -21,20 +21,35 @@ class LoginViewModel extends GetxController {
       return;
     }
 
-    // 2. 서버로 토큰 전송
     final jwtAccessToken =
         await _authRepository.sendTokenToServer(token.accessToken);
     if (jwtAccessToken != null) {
-      // 3. 사용자 정보 저장
       final user = await _authService.getKakaoUserInfo();
       if (user != null) {
         await _authRepository.saveTokens(jwtAccessToken, token.accessToken,
             token.refreshToken!, user.id.toString());
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('회원가입 성공!'),
-          backgroundColor: Colors.green,
-        ));
-        Navigator.pushReplacementNamed(context, '/onboard');
+
+        final isRegistered =
+            await _authService.checkSignUpStatus(user.id.toString());
+        if (isRegistered) {
+          CustomToastManager().showCustomToast(
+            message: "로그인 성공",
+            type: ToastType.POSITIVE,
+          );
+          isLoading.value = false;
+
+          Navigator.pushReplacementNamed(context, '/group');
+          return;
+        } else {
+          CustomToastManager().showCustomToast(
+            message: "회원가입 성공",
+            type: ToastType.POSITIVE,
+          );
+          isLoading.value = false;
+
+          Navigator.pushReplacementNamed(context, '/onboard');
+          return;
+        }
       }
     } else {
       print('서버에서 JWT 토큰을 받지 못했습니다.');
