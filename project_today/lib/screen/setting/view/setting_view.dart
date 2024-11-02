@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_today/screen/setting/view_model/setting_view_model.dart';
+import 'package:project_today/ui/molecules/customDialog.dart';
 import 'package:project_today/ui/templates/settingTemplate.dart';
 import 'package:skeletonizer/skeletonizer.dart'; // 스켈레톤 로딩 추가
 
@@ -26,27 +27,20 @@ class SettingView extends StatelessWidget {
               _viewModel.fetchUserInfo();
             },
             isGroupSetting: false,
-            onLogout: _onLogout,
+            onLogout: () {
+              showCustomDialog(
+                context,
+                "로그아웃 하시겠습니까?",
+                "취소",
+                "로그아웃",
+                () {
+                  _viewModel.logout(context); // 로그아웃 함수 호출
+                },
+              );
+            },
           ),
         );
       }),
-    );
-  }
-
-  // 로그아웃 처리
-  void _onLogout() {
-    Get.dialog(
-      AlertDialog(
-        title: Text("로그아웃 되었습니다"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.offAllNamed('/'); // GetX 네비게이션 사용
-            },
-            child: Text("확인"),
-          ),
-        ],
-      ),
     );
   }
 }
