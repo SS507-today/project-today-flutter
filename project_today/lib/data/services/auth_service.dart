@@ -21,6 +21,23 @@ class AuthService {
     }
   }
 
+  /// 카카오 로그아웃 처리
+  Future<bool> logoutFromKakao() async {
+    try {
+      if (await AuthApi.instance.hasToken()) {
+        await UserApi.instance.logout();
+        print("카카오 로그아웃 성공");
+        return true;
+      } else {
+        print("카카오 토큰이 없습니다. 이미 로그아웃 상태입니다.");
+        return true;
+      }
+    } catch (error) {
+      print("카카오 로그아웃 실패: $error");
+      return false;
+    }
+  }
+
   /// 카카오 사용자 정보 가져오기
   Future<User?> getKakaoUserInfo() async {
     try {
@@ -81,6 +98,40 @@ class AuthService {
     } catch (e) {
       print('서버 요청 중 오류 발생: $e');
       return null;
+    }
+  }
+
+  /// 회원가입 여부 확인 API 호출
+  Future<bool> checkSignUpStatus(String? authId) async {
+    final String endpoint = '/auth/check-registration';
+
+    final longAuthId = int.tryParse(authId!); // String을 int로 변환 시도
+    if (longAuthId == null) {
+      print('authId 변환 실패: 유효하지 않은 authId입니다. $longAuthId');
+      return false;
+    }
+
+    // 요청 본문 데이터
+    final body = {
+      'authId': longAuthId,
+    };
+
+    try {
+      final response = await _apiService.post(
+        endpoint,
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        return responseData['data']['isRegistered'] ?? false; // 회원가입 상태
+      } else {
+        print('회원가입 확인 실패: ${response.body}');
+        return false;
+      }
+    } catch (e) {
+      print('서버 요청 중 오류 발생: $e');
+      return false;
     }
   }
 }

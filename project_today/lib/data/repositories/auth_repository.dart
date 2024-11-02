@@ -86,4 +86,12 @@ class AuthRepository {
       return false;
     }
   }
+
+  /// 저장된 모든 토큰 삭제
+  Future<void> clearTokens() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('jwtAccessToken');
+    await prefs.remove('kakaoAccessToken');
+    await prefs.remove('refreshToken');
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async'; // Timer 사용을 위한 추가
+
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/ui/molecules/gradientFabMenu.dart';
 import 'package:project_today/ui/organisms/header.dart';
@@ -17,15 +19,25 @@ class GroupTemplate extends StatefulWidget {
 
 class _GroupTemplateState extends State<GroupTemplate> {
   bool isLoading = true;
+  Timer? _timer; // Timer를 위한 변수 추가
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 200), () {
-      setState(() {
-        isLoading = false;
-      });
+    // Timer를 생성하고 일정 시간이 지나면 로딩 상태 해제
+    _timer = Timer(Duration(milliseconds: 200), () {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // dispose에서 Timer 취소
+    super.dispose();
   }
 
   @override

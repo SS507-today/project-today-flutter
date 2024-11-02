@@ -132,10 +132,15 @@ class ApiService {
     Map<String, String>? headers,
     Map<String, String>? queryParams,
     String? accessToken,
+    bool excludeContentType = false,
   }) async {
     final uri =
         Uri.parse('$baseUrl$endpoint').replace(queryParameters: queryParams);
     final combinedHeaders = _createHeaders(headers, accessToken);
+    // excludeContentType 플래그가 true인 경우 Content-Type 제거
+    if (excludeContentType) {
+      combinedHeaders.remove('Content-Type');
+    }
     final response = await http.delete(uri, headers: combinedHeaders);
     _handleResponse(response);
     return response;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_today/screen/group_setting/view_model/group_setting_view_model.dart';
+import 'package:project_today/ui/molecules/customDialog.dart';
 import 'package:project_today/ui/templates/settingTemplate.dart';
 
 class GroupSettingView extends StatelessWidget {
@@ -22,6 +23,17 @@ class GroupSettingView extends StatelessWidget {
             //   await Navigator.pushNamed(context, '/change');
             // 2) 닉네임이 변경된 후 사용자 정보 갱신
             // _groupSettingViewModel.fetchGroupProfile();
+          },
+          onThirdOption: () {
+            showCustomDialog(
+              context,
+              "그룹에서 탈퇴하시겠습니까?",
+              "취소",
+              "탈퇴",
+              () {
+                _groupSettingViewModel.leaveGroup(context);
+              },
+            );
           },
         );
       }),

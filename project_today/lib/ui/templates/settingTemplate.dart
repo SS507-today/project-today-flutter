@@ -74,12 +74,21 @@ class SettingTemplate extends StatelessWidget {
                   SizedBox(height: 14),
 
                   // isGroupSetting이 false일 경우 로그아웃 버튼과 콜백 표시
-                  if (!isGroupSetting)
+                  if (!isGroupSetting) ...[
                     DefaultListEl(
                       title: '로그아웃',
                       onPressed: onLogout ?? () {},
                       isShowArrow: false,
                     ),
+                    SizedBox(height: 14),
+                    if (!isGroupSetting)
+                      DefaultListEl(
+                        title: '회원 탈퇴',
+                        titleColor: ColorSystem.Red,
+                        onPressed: onThirdOption ?? () {},
+                        isShowArrow: true,
+                      ),
+                  ],
 
                   // isGroupSetting이 true일 경우 추가된 항목 표시
                   if (isGroupSetting) ...[
