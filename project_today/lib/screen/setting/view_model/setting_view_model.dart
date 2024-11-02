@@ -4,6 +4,7 @@ import 'package:project_today/data/services/auth_service.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
 import 'package:project_today/data/models/user_model.dart';
 import 'package:project_today/data/repositories/user_repository.dart';
+import 'package:project_today/data/services/delete_member.dart';
 import 'package:project_today/screen/login/view/login_view.dart';
 import 'package:project_today/ui/atoms/index.dart';
 
@@ -11,6 +12,7 @@ class SettingViewModel extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
   final UserRepository _userRepository = UserRepository();
   final AuthService _authService = AuthService();
+  final DeleteMember _deleteMember = DeleteMember();
 
   var user = User(
     authId: 0,
@@ -95,6 +97,36 @@ class SettingViewModel extends GetxController {
         message: "로그아웃 실패",
         type: ToastType.NEGATIVE,
       );
+    }
+  }
+
+  /// 회원 탈퇴
+  Future<void> leaveApp(BuildContext context) async {
+    final tokens = await _authRepository.loadTokens();
+    final String? accessToken = tokens['jwtAccessToken'];
+    // 그룹 탈퇴 API 호출
+    final result = await _deleteMember.leaveApp(accessToken!); // API 호출 결과 처리
+
+    if (result != null) {
+      print("회원 탈퇴 성공");
+
+      CustomToastManager().showCustomToast(
+        message: "오늘은에서 탈퇴했습니다.",
+        type: ToastType.POSITIVE,
+      );
+      // 쌓여 있는 모든 라우트를 제거하고 로그인 화면으로 이동
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LoginView()), // LoginView를 직접 지정
+        (Route<dynamic> route) => false,
+      );
+    } else {
+      CustomToastManager().showCustomToast(
+        message: "회원 탈퇴 실패",
+        type: ToastType.NEGATIVE,
+      );
+      print("회원 탈퇴 실패");
     }
   }
 }

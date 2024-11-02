@@ -38,6 +38,17 @@ class SettingView extends StatelessWidget {
                 },
               );
             },
+            onThirdOption: () {
+              showCustomDialog(
+                context,
+                "정말로 탈퇴하시겠습니까?",
+                "취소",
+                "탈퇴",
+                () {
+                  _viewModel.leaveApp(context); // 로그아웃 함수 호출
+                },
+              );
+            },
           ),
         );
       }),
