@@ -1,5 +1,6 @@
 library molecules;
 
+export 'customDialog.dart';
 export 'customImageCarousel.dart';
 export 'customTabBar.dart';
 export 'glowGradientBox.dart';
