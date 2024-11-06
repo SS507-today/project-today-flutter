@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_today/core/constant/index.dart';
 
@@ -18,6 +19,9 @@ class CustomTextField extends StatefulWidget {
   ///외부에서 전달받는 TextEditingController
   final TextEditingController? controller;
 
+  ///인풋 포맷터
+  final List<TextInputFormatter>? inputFormatters;
+
   const CustomTextField({
     Key? key,
     this.borderColor = GreyColorSystem.Grey3,
@@ -25,6 +29,7 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     this.onChanged,
     this.controller,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -88,6 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
         onChanged: widget.onChanged,
+        inputFormatters: widget.inputFormatters,
       ),
     );
   }
