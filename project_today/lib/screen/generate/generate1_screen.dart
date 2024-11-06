@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_today/core/constant/colors.dart';
 import 'package:project_today/ui/atoms/customTextField.dart';
 
@@ -36,6 +37,9 @@ class GeneratePage1 extends StatelessWidget {
           CustomTextField(
             hintText: "1-15자 이내로 입력해 주세요",
             onChanged: onGroupNameChanged,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(15),
+            ],
           ),
           const SizedBox(height: 40),
           const Text(
@@ -70,6 +74,9 @@ class GeneratePage1 extends StatelessWidget {
           CustomTextField(
             hintText: "1-50자 이내로 입력해 주세요",
             onChanged: onGroupDescriptionChanged,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(50),
+            ],
           ),
         ],
       ),

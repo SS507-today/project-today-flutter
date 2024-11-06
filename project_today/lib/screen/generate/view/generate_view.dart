@@ -8,6 +8,7 @@ import 'package:project_today/screen/generate/generate2_screen.dart';
 import 'package:project_today/screen/generate/generate3_screen.dart';
 import 'package:project_today/screen/generate/generate4_screen.dart';
 import 'package:project_today/ui/organisms/bottomSheet.dart';
+import 'package:project_today/ui/atoms/customToast.dart';
 
 /// 그룹 생성 뷰 (GeneratePage1, GeneratePage2, ...)
 class GenerateView extends StatefulWidget {
@@ -64,23 +65,34 @@ class _GenerateViewState extends State<GenerateView> {
 
   void _validateForm() {
     setState(() {
-      isButtonActive =
-          groupName.isNotEmpty && groupDescription.isNotEmpty && groupSize > 0;
+      isButtonActive = groupName.isNotEmpty &&
+          groupName.length <= 15 &&
+          groupDescription.isNotEmpty &&
+          groupDescription.length <= 50 &&
+          groupSize > 0;
     });
   }
 
   void _onGroupNameChanged(String value) {
-    setState(() {
-      groupName = value;
-      _validateForm();
-    });
+    if (value.length >= 15) {
+      _showToast(context, '최대 15자까지 입력할 수 있어요');
+    } else {
+      setState(() {
+        groupName = value;
+        _validateForm();
+      });
+    }
   }
 
   void _onGroupDescriptionChanged(String value) {
-    setState(() {
-      groupDescription = value;
-      _validateForm();
-    });
+    if (value.length >= 50) {
+      _showToast(context, '최대 50자까지 입력할 수 있어요');
+    } else {
+      setState(() {
+        groupDescription = value;
+        _validateForm();
+      });
+    }
   }
 
   void _onGroupSizeChanged(double value) {
@@ -178,5 +190,32 @@ class _GenerateViewState extends State<GenerateView> {
         },
       ),
     );
+  }
+
+  void _showToast(BuildContext context, String message) {
+    final overlay = Overlay.of(context);
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: keyboardHeight + 20.0,
+        left: 0,
+        right: 0,
+        child: Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: CustomToast(
+              text: message,
+              type: ToastType.NEGATIVE,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay?.insert(overlayEntry);
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
   }
 }
