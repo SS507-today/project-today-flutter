@@ -3,7 +3,7 @@ import 'package:project_today/core/constant/index.dart';
 import 'package:project_today/ui/atoms/index.dart';
 
 class TagBottomSheet extends StatelessWidget {
-  /// 멤버들의 정보가 담긴 리스트 (최대 5명)
+  /// 멤버들의 정보가 담긴 리스트 (최대 6명)
   final List<Map<String, String>> members;
 
   const TagBottomSheet({
@@ -30,32 +30,30 @@ class TagBottomSheet extends StatelessWidget {
     );
   }
 
-  /// 멤버들을 2명씩 묶어서 행(row)으로 반환
+  /// 멤버 수에 따라 행(row) 구조 조정
   List<Widget> _buildTagRows() {
     List<Widget> rows = [];
-    for (int i = 0; i < members.length; i += 2) {
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TagListEl(
-              name: members[i]['name'] ?? '',
-              imgPath: members[i]['imgPath'] ?? '',
-            ),
-            // 두 번째 멤버가 있으면 표시, 없으면 빈 공간
-            if (i + 1 < members.length)
-              TagListEl(
-                name: members[i + 1]['name'] ?? '',
-                imgPath: members[i + 1]['imgPath'] ?? '',
-              ),
-            if (i + 1 >= members.length) SizedBox(width: 72), // 빈 공간
-          ],
+    List<Widget> rowItems = [];
+
+    for (int i = 0; i < members.length; i++) {
+      rowItems.add(
+        TagListEl(
+          name: members[i]['name'] ?? '',
+          imgPath: members[i]['imgPath'] ?? '',
         ),
       );
-      if (i + 2 < members.length) {
+
+      // 3명마다 줄바꿈, 혹은 마지막 요소 추가 시
+      if ((i + 1) % 3 == 0 || i == members.length - 1) {
+        rows.add(Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: rowItems,
+        ));
         rows.add(const SizedBox(height: 16));
+        rowItems = []; // 새 행을 위해 초기화
       }
     }
+
     return rows;
   }
 }
