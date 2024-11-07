@@ -38,7 +38,7 @@ class LoginViewModel extends GetxController {
           );
           isLoading.value = false;
 
-          Navigator.pushReplacementNamed(context, '/group');
+          Navigator.pushReplacementNamed(context, '/onboard');
           return;
         } else {
           CustomToastManager().showCustomToast(
