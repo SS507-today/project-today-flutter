@@ -83,6 +83,7 @@ class _GradientFabMenuState extends State<GradientFabMenu>
       child: ScaleTransition(
         scale: _animation,
         child: FloatingActionButton.extended(
+          heroTag: 'uniqueHeroTag_${label}_${animationOffset}',
           onPressed: () {
             Navigator.pushNamed(context, route);
           },
