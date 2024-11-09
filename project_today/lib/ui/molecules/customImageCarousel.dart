@@ -45,6 +45,36 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
     super.dispose();
   }
 
+  void _showImageDialog(String imageUrl) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.black,
+          insetPadding: EdgeInsets.all(10),
+          child: InteractiveViewer(
+            panEnabled: true,
+            minScale: 0.5,
+            maxScale: 4.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/images/empty.png',
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,29 +92,33 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
             },
             itemBuilder: (context, index) {
               String imageUrl = widget.imageUrls[index];
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey.shade200,
-                ),
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: imageUrl.isNotEmpty
-                      ? Image.network(
-                          imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/images/empty.png',
-                              fit: BoxFit.cover,
-                            ); // 기본 이미지 표시
-                          },
-                        )
-                      : Image.asset(
-                          'assets/images/empty.png',
-                          fit: BoxFit.cover,
-                        ), // 경로가 비어 있으면 기본 이미지 표시
+              return GestureDetector(
+                onTap: () => _showImageDialog(imageUrl),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.grey.shade200,
+                  ),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: imageUrl.isNotEmpty
+                        ? Image.network(
+                            imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/empty.png',
+                                fit: BoxFit.cover,
+                              ); // 기본 이미지 표시
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/empty.png',
+                            fit: BoxFit.cover,
+                          ), // 경로가 비어 있으면 기본 이미지 표시
+                  ),
                 ),
               );
             },
