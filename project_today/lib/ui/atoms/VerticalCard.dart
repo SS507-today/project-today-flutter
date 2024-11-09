@@ -49,15 +49,6 @@ class VerticalCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-        const SizedBox(height: 5.0),
-        Container(
-          width: 100.0,
-          height: 20.0,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
       ],
     );
   }
