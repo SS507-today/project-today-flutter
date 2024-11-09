@@ -15,17 +15,15 @@ class DiaryView extends StatelessWidget {
           showGlowGradientBox: false,
           showGlowGradientImageBox: true,
           onTapGradientBox: () {
-            if (viewModel.bundlesList.isNotEmpty) {
-              final firstBundleId = viewModel.bundlesList.first.bundleId;
-              Navigator.pushNamed(
-                context,
-                '/read',
-                arguments: {
-                  'bundleId': firstBundleId,
-                  'isWeek': true,
-                },
-              );
-            }
+            final firstBundleId = viewModel.recentDiaries;
+            Navigator.pushNamed(
+              context,
+              '/read',
+              arguments: {
+                'bundleId': firstBundleId,
+                'isWeek': true,
+              },
+            );
           },
           imgPath:
               'assets/images/cover/group_${viewModel.shareGroupInfo?.coverImage}.png',

@@ -28,11 +28,11 @@ class _CollectionViewState extends State<CollectionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        // 첫 번째 번들을 제외하고 리스트를 생성
-        final bundles = _collectionViewModel.bundlesList.length > 1
+        final bundles = _collectionViewModel.bundlesList;
+        /*.length > 1
             ? _collectionViewModel.bundlesList.sublist(1) // 첫 번째 번들 제외
             : [];
-
+*/
         final bundleData = bundles.map((bundle) {
           return {
             'id': bundle.bundleId,
