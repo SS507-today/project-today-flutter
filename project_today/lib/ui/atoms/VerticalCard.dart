@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 
 class VerticalCard extends StatelessWidget {
-  /// 배경 이미지 경로
   final String? imgPath;
-
-  /// 요소 설명 텍스트
   final String? desc;
-
-  /// 버튼이 눌렸을 때 실행될 콜백 함수
   final VoidCallback? onPressed;
-
-  /// 스켈레톤을 위한 로딩 상태
   final bool isLoading;
 
   const VerticalCard({
@@ -26,8 +19,6 @@ class VerticalCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 169.0,
-        height: 225.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14.0),
@@ -39,13 +30,14 @@ class VerticalCard extends StatelessWidget {
 
   Widget _buildSkeleton() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 169.0,
+          width: double.infinity,
           height: 158.0,
           decoration: BoxDecoration(
             color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(14.0), // 모서리 둥글게 설정
+            borderRadius: BorderRadius.circular(14.0),
           ),
         ),
         const SizedBox(height: 10.0),
@@ -54,7 +46,7 @@ class VerticalCard extends StatelessWidget {
           height: 20.0,
           decoration: BoxDecoration(
             color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8.0), // 텍스트 스켈레톤도 둥글게 설정
+            borderRadius: BorderRadius.circular(8.0),
           ),
         ),
         const SizedBox(height: 5.0),
@@ -63,7 +55,7 @@ class VerticalCard extends StatelessWidget {
           height: 20.0,
           decoration: BoxDecoration(
             color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(8.0), // 텍스트 스켈레톤도 둥글게 설정
+            borderRadius: BorderRadius.circular(8.0),
           ),
         ),
       ],
@@ -73,14 +65,14 @@ class VerticalCard extends StatelessWidget {
   Widget _buildContent() {
     return Stack(
       children: [
-        Container(
-          width: 185.0,
-          height: 300.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14.0),
-            image: DecorationImage(
-              image: AssetImage(imgPath!),
-              fit: BoxFit.cover,
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14.0),
+              image: DecorationImage(
+                image: AssetImage(imgPath!),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
