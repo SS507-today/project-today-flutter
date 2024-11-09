@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_today/data/models/home_model.dart';
 import 'package:project_today/data/models/group_status_model.dart';
+import 'package:project_today/data/models/index.dart';
+import 'package:project_today/data/repositories/bundles_recent_repository.dart';
 import 'package:project_today/data/services/get_home_service.dart';
 import 'package:project_today/data/repositories/auth_repository.dart';
 import 'package:project_today/data/repositories/bundles_repository.dart';
@@ -13,8 +15,10 @@ class HomeViewModel extends ChangeNotifier {
   final AuthRepository _authRepository = AuthRepository();
   final GetHomeService _diaryService = GetHomeService();
   final BundleRepository _bundleRepository = BundleRepository();
-
+  final BundleRecentDiariesRepository _recentDiariesRepository =
+      BundleRecentDiariesRepository();
   GroupStatus? _groupStatus;
+
   HomeResponse? _diaryResponse;
   bool _isLoading = false;
   bool _hasError = false;
@@ -25,6 +29,15 @@ class HomeViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasError => _hasError;
   String get errorMessage => _errorMessage;
+
+  // 최신 다이어리 상태 변수
+  BundlesDiaries _recentDiaries = BundlesDiaries(
+    shareGroupId: 0,
+    bundleId: 0,
+    diaries: [],
+  );
+
+  int get recentDiaries => _recentDiaries.bundleId;
 
   // 번들 리스트와 커버 이미지를 위한 상태 변수
   List<BundleInfo> _bundlesList = [];
@@ -93,6 +106,7 @@ class HomeViewModel extends ChangeNotifier {
       if (_groupStatus?.status == 'ACTIVE') {
         await fetchGroupHome(groupId, accessToken);
         await fetchBundles(groupId);
+        await fetchRecentDiaries(groupId);
       }
     } catch (e) {
       _hasError = true;
@@ -145,6 +159,32 @@ class HomeViewModel extends ChangeNotifier {
       } catch (e) {
         _errorMessage = "번들 정보를 가져오는 중 오류 발생: $e";
         _hasError = true;
+      } finally {
+        _isLoading = false;
+        notifyListeners();
+      }
+    }
+  }
+
+  /// 최신 번들 다이어리 목록을 가져오는 메서드
+  Future<void> fetchRecentDiaries(int groupId) async {
+    final tokens = await _authRepository.loadTokens();
+    final String? accessToken = tokens['jwtAccessToken'];
+
+    if (accessToken != null) {
+      _isLoading = true;
+      notifyListeners();
+
+      try {
+        // 최신 다이어리 목록 가져오기
+        await _recentDiariesRepository.fetchBundleDiaries(groupId, accessToken);
+        _recentDiaries = _recentDiariesRepository.bundleRecentDiaries.value;
+
+        print('최신 다이어리 목록 가져오기 성공: ${_recentDiaries.diaries}');
+      } catch (e) {
+        _hasError = true;
+        _errorMessage = "최신 다이어리 목록 가져오는 중 오류 발생: $e";
+        print(_errorMessage);
       } finally {
         _isLoading = false;
         notifyListeners();
