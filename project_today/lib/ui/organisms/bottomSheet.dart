@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_today/ui/atoms/customToast.dart';
 
 //TODO 바텀시트 자체만 두고, 기능 내용은 위에서 관리해야 할듯
 
@@ -22,6 +23,12 @@ class BottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ruleController.addListener(() {
+      if (ruleController.text.length >= 30) {
+        _showToast(context, "최대 30자만 입력할 수 있어요");
+      }
+    });
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom + 20,
@@ -59,6 +66,7 @@ class BottomSheetWidget extends StatelessWidget {
                   controller: ruleController,
                   focusNode: focusNode,
                   autofocus: true,
+                  maxLength: 30,
                   decoration: InputDecoration(
                     hintText: "30자 이내로 입력해 주세요",
                     hintStyle: TextStyle(
@@ -70,6 +78,7 @@ class BottomSheetWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none,
                     ),
+                    counterText: "",
                   ),
                   onFieldSubmitted: (value) {
                     if (value.isNotEmpty) {
@@ -85,5 +94,33 @@ class BottomSheetWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showToast(BuildContext context, String message) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(builder: (context) {
+      double bottomOffset = MediaQuery.of(context).viewInsets.bottom + 180.0;
+
+      return Positioned(
+        bottom: bottomOffset,
+        left: 0,
+        right: 0,
+        child: Align(
+          alignment: Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: CustomToast(
+              text: message,
+              type: ToastType.NEGATIVE,
+            ),
+          ),
+        ),
+      );
+    });
+
+    overlay?.insert(overlayEntry);
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
   }
 }
