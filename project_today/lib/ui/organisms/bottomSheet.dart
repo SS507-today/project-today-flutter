@@ -24,10 +24,10 @@ class BottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
         left: 20,
         right: 20,
-        top: 23,
+        top: 15,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
