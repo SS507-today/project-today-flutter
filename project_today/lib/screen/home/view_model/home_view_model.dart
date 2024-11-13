@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_today/data/models/home_model.dart';
-import 'package:project_today/data/models/group_status_model.dart';
 import 'package:project_today/data/models/index.dart';
 import 'package:project_today/data/repositories/bundles_recent_repository.dart';
+import 'package:project_today/data/repositories/index.dart';
 import 'package:project_today/data/services/get_home_service.dart';
-import 'package:project_today/data/repositories/auth_repository.dart';
-import 'package:project_today/data/repositories/bundles_repository.dart';
-import 'package:project_today/data/models/bundles_model.dart';
+
 import 'package:project_today/ui/atoms/index.dart';
 
 ///교환일기 홈 - 분기되는 뷰에 대한 모든 정보를 가져옴 (diary, timer, waiting)
@@ -17,6 +14,7 @@ class HomeViewModel extends ChangeNotifier {
   final BundleRepository _bundleRepository = BundleRepository();
   final BundleRecentDiariesRepository _recentDiariesRepository =
       BundleRecentDiariesRepository();
+
   GroupStatus? _groupStatus;
 
   HomeResponse? _diaryResponse;
@@ -83,6 +81,10 @@ class HomeViewModel extends ChangeNotifier {
     return _groupStatus?.openAt;
   }
 
+  String? get groupName {
+    return _groupStatus?.name;
+  }
+
   Future<void> initializeGroupFlow(int groupId) async {
     _isLoading = true;
     _hasError = false;
@@ -103,10 +105,9 @@ class HomeViewModel extends ChangeNotifier {
 
     try {
       await fetchGroupStatus(groupId, accessToken);
-      await fetchGroupHome(groupId, accessToken);
 
       if (_groupStatus?.status == 'ACTIVE') {
-        //   await fetchGroupHome(groupId, accessToken);
+        await fetchGroupHome(groupId, accessToken);
         await fetchBundles(groupId);
         await fetchRecentDiaries(groupId);
       }

@@ -10,7 +10,7 @@ class TimerView extends StatelessWidget {
     final viewModel = Provider.of<HomeViewModel>(context);
 
     return Diaryhometemplate(
-        headerTitle: viewModel.shareGroupInfo?.groupName ?? '그룹 이름 없음',
+        headerTitle: viewModel.groupName ?? '그룹 이름 없음',
         topText: "친구들이 모두 들어오면\n교환일기가 시작돼요!",
         createdAt: viewModel.openAt,
         imgPath: 'assets/images/waiting.png',
