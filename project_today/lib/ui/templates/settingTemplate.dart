@@ -102,12 +102,12 @@ class SettingTemplate extends StatelessWidget {
                       isShowArrow: true,
                     ),
                     SizedBox(height: 14),
-                    DefaultListEl(
+                    /*DefaultListEl(
                       title: '그룹 설정 변경',
                       onPressed: onSecondOption ?? () {},
                       isShowArrow: true,
-                    ),
-                    SizedBox(height: 14),
+                    ),*/
+                    //   SizedBox(height: 14),
                     DefaultListEl(
                       title: deleteTitle,
                       titleColor: ColorSystem.Red,
