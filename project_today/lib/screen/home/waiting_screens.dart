@@ -11,7 +11,7 @@ class WaitingView extends StatelessWidget {
     final viewModel = Provider.of<HomeViewModel>(context);
 
     return Diaryhometemplate(
-      headerTitle: 'SS507',
+      headerTitle: viewModel.shareGroupInfo?.groupName ?? '그룹 이름 없음',
       name: viewModel.currentWriter?.name ?? '알 수 없음',
       topText: "님이 일기를 쓰고 있어요",
       bottomText: "눌러서 재촉해보세요!",

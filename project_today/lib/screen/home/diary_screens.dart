@@ -10,7 +10,7 @@ class DiaryView extends StatelessWidget {
     return Consumer<HomeViewModel>(
       builder: (context, viewModel, child) {
         return Diaryhometemplate(
-          headerTitle: 'SS507',
+          headerTitle: viewModel.shareGroupInfo?.groupName ?? '그룹 이름 없음',
           topText: "새로운 일기를 담은\n교환일기가 도착했어요!",
           showGlowGradientBox: false,
           showGlowGradientImageBox: true,

@@ -103,8 +103,10 @@ class HomeViewModel extends ChangeNotifier {
 
     try {
       await fetchGroupStatus(groupId, accessToken);
+      await fetchGroupHome(groupId, accessToken);
+
       if (_groupStatus?.status == 'ACTIVE') {
-        await fetchGroupHome(groupId, accessToken);
+        //   await fetchGroupHome(groupId, accessToken);
         await fetchBundles(groupId);
         await fetchRecentDiaries(groupId);
       }
