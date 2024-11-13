@@ -23,7 +23,7 @@ class _GenerateViewState extends State<GenerateView> {
   String groupName = '';
   String groupDescription = '';
   double groupSize = 0;
-  int selectedCoverIndex = -1;
+  int selectedCoverIndex = 1;
   List<String> rules = [];
 
   TextEditingController ruleController = TextEditingController();

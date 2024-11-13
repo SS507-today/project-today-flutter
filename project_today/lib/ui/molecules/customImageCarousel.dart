@@ -9,8 +9,8 @@ class CustomImageCarousel extends StatefulWidget {
   ///뷰포트 비율
   final double viewportFraction;
 
-  /// 박스 높이
-  final double height;
+  /// 박스 넓이
+  final double width;
 
   /// 페이지가 변경될 때 호출될 콜백
   final Function(int)? onPageChanged;
@@ -19,7 +19,7 @@ class CustomImageCarousel extends StatefulWidget {
     Key? key,
     required this.imageUrls,
     this.viewportFraction = 0.618,
-    this.height = 324,
+    this.width = 324,
     this.onPageChanged,
   }) : super(key: key);
 
@@ -34,7 +34,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
   void initState() {
     super.initState();
     _pageController = PageController(
-      viewportFraction: widget.viewportFraction,
+      //    viewportFraction: widget.viewportFraction,
       keepPage: true,
     );
   }
@@ -77,11 +77,16 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width; // 화면 너비 가져오기
+    final double cardWidth = screenWidth * 0.6; // 화면의 50% 너비
+    final double cardHeight = cardWidth * 1.2; // 너비, 높이 비율 따른 계산
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(
-          height: widget.height,
+          width: cardWidth,
+          height: cardHeight,
           child: PageView.builder(
             controller: _pageController,
             itemCount: widget.imageUrls.length,
